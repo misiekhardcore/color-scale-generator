@@ -17,7 +17,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'next.config.js'],
+  ignorePatterns: ['.eslintrc.js', 'next.config.js', 'tailwind.config.js', 'postcss.config.js'],
   rules: {
     'prettier/prettier': 'error',
   },

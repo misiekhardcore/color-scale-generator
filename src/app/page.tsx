@@ -1,7 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
-import styles from './page.module.css';
+import { DetailedHTMLProps, FormEvent, InputHTMLAttributes, useState } from 'react';
 
 type RGB = { r: number; g: number; b: number };
 type HSL = { h: number; s: number; l: number };
@@ -30,38 +29,22 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.main}>
+    <main className="grid gap-2">
       <form onSubmit={calculateCColorScale}>
-        <label>
-          First color
-          <input
-            type="text"
-            value={firstColor}
-            maxLength={6}
-            onChange={(e) => setFirstColor(e.target.value)}
-          />
-        </label>
-        <label>
-          Second color
-          <input
-            type="text"
-            value={secondColor}
-            maxLength={6}
-            onChange={(e) => setSecondColor(e.target.value)}
-          />
-        </label>
-        <label>
-          how many results
-          <input
-            type="number"
-            value={colorsNumber}
-            onChange={(e) => {
-              const count = parseInt(e.target.value);
-              setColorsNumber(count);
-            }}
-          />
-        </label>
-        <button type="submit">calculate</button>
+        <Input value={firstColor} onChange={setFirstColor} label="First color" maxLength={6} />
+        <Input value={secondColor} onChange={setSecondColor} label="Second color" maxLength={6} />
+        <Input
+          value={colorsNumber.toString()}
+          onChange={(value) => setColorsNumber(parseInt(value))}
+          label="How many results"
+          type="number"
+        />
+        <button
+          className="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+        >
+          calculate
+        </button>
       </form>
       <div className="calculations">
         <div className="calculation">
@@ -77,7 +60,14 @@ export default function Home() {
       </div>
       <div className="colorScale">
         {results.map((result, index) => (
-          <div key={index} className="color" style={{ backgroundColor: `#${result}` }}>
+          <div
+            key={index}
+            className="rounded h-40 w-40 flex justify-center items-center color"
+            style={{
+              backgroundColor: `#${result}`,
+              borderColor: `#${hexToOposite(result)}`,
+            }}
+          >
             {result}
           </div>
         ))}
@@ -91,6 +81,11 @@ function hexToRgb(hex: string) {
   const g = parseInt(hex.slice(2, 4), 16);
   const b = parseInt(hex.slice(4, 6), 16);
   return { r, g, b };
+}
+
+function hexToOposite(hex: string) {
+  const { r, g, b } = hexToRgb(hex);
+  return rgbToHex(255 - r, 255 - g, 255 - b);
 }
 
 function hexToHsl(hex: string) {
@@ -129,6 +124,32 @@ function rgbToHex(r: number, g: number, b: number) {
   return `${r.toString(16).padStart(2, '0')}${g
     .toString(16)
     .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}
+
+function Input({
+  value,
+  onChange,
+  label,
+  ...rest
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  label: string;
+} & Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'onChange' | 'capture'
+>) {
+  return (
+    <label className="flex flex-col gap-1">
+      {label}
+      <input
+        {...rest}
+        className="bg-white border-2 rounded py-2 px-4"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </label>
+  );
 }
 
 function PrintHex({ hex }: { hex: string }) {
