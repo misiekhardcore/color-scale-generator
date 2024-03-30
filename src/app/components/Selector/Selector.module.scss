@@ -1,0 +1,7 @@
+.Selector {
+  @apply flex flex-col gap-1;
+
+  select {
+    @apply w-full;
+  }
+}

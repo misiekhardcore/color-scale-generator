@@ -1,0 +1,7 @@
+.ColorOutput {
+  @apply flex flex-col gap-2 border-2 px-4 py-2;
+
+  .item span {
+    @apply font-bold;
+  }
+}
