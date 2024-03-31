@@ -13,6 +13,6 @@ describe('Input', () => {
     const onChange = jest.fn();
     render(<Input value="test" onChange={onChange} label="Test" />);
     fireEvent.change(screen.getByDisplayValue('test'), { target: { value: 'new value' } });
-    expect(onChange).toHaveBeenCalledWith('new value');
+    expect(onChange).toHaveBeenCalledWith('new value', expect.any(Object));
   });
 });
