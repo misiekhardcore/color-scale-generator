@@ -115,7 +115,9 @@ const convertersFromRgb: ConvertersFromRGB = {
   },
   rgbToHex: (color) => {
     return {
-      hex: `#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b
+      hex: `#${Math.round(color.r).toString(16).padStart(2, '0')}${Math.round(color.g).toString(16).padStart(2, '0')}${Math.round(
+        color.b
+      )
         .toString(16)
         .padStart(2, '0')}`,
     };

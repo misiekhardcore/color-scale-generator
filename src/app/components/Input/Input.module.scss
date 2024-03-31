@@ -1,3 +1,13 @@
 .Input {
   @apply flex flex-col gap-1;
+
+  input,
+  select,
+  textarea {
+    @apply w-full;
+  }
+
+  input[type='color'] {
+    @apply h-10 p-0 m-0;
+  }
 }

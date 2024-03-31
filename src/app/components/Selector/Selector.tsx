@@ -1,6 +1,7 @@
 import { isNumber } from '@/lib/helpers';
 
 import styles from './Selector.module.scss';
+import classNames from 'classnames';
 
 type Value = string | number | undefined;
 
@@ -9,11 +10,18 @@ type SelectorProps<T extends Value> = {
   items: readonly T[];
   selected: T;
   onChange: (value: T) => void;
+  className?: string;
 };
 
-export function Selector<T extends Value>({ items, selected, onChange, label }: SelectorProps<T>) {
+export function Selector<T extends Value>({
+  items,
+  selected,
+  onChange,
+  label,
+  className,
+}: SelectorProps<T>) {
   return (
-    <label className={styles.Selector}>
+    <label className={classNames(styles.Selector, className)}>
       {label}
       <select
         value={selected}

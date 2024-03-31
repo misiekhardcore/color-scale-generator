@@ -1,4 +1,5 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import classNames from 'classnames';
 
 import styles from './Input.module.scss';
 
@@ -8,16 +9,22 @@ type InputProps<T extends Value> = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   'onChange' | 'capture'
 > & {
-  value: T;
-  onChange: (value: T) => void;
+  value?: T;
+  onChange: (value: T, e: ChangeEvent<HTMLInputElement>) => void;
   label: string;
 };
 
-export function Input<T extends Value>({ value, onChange, label, ...rest }: InputProps<T>) {
+export function Input<T extends Value>({
+  value,
+  onChange,
+  label,
+  className,
+  ...rest
+}: InputProps<T>) {
   return (
-    <label className={styles.Input}>
+    <label className={classNames(styles.Input, className)}>
       {label}
-      <input {...rest} value={value} onChange={(e) => onChange(e.target.value as T)} />
+      <input {...rest} value={value} onChange={(e) => onChange(e.target.value as T, e)} />
     </label>
   );
 }

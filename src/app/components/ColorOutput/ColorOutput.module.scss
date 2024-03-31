@@ -1,7 +1,13 @@
 .ColorOutput {
-  @apply flex flex-col gap-2 border-2 px-4 py-2;
+  @apply flex flex-col border-2 p-2 rounded justify-center;
+  min-width: 150px;
 
-  .item span {
-    @apply font-bold;
+  .item {
+    @apply p-1;
+    pointer-events: none;
+
+    span {
+      @apply font-bold;
+    }
   }
 }

@@ -1,3 +1,6 @@
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import classNames from 'classnames';
+
 import { ColorTypeMap } from '@/app/types';
 import { isNumber } from '@/lib/helpers';
 import { Converter } from '@/lib/services';
@@ -6,17 +9,17 @@ import styles from './ColorOutput.module.scss';
 
 const MAX_DECIMALS = 3;
 
-type ColorOutputProps = {
+type ColorOutputProps = DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> & {
   value: ColorTypeMap[keyof ColorTypeMap];
   from: keyof ColorTypeMap;
   to: keyof ColorTypeMap;
 };
 
-export function ColorOutput({ value, from, to }: ColorOutputProps) {
+export function ColorOutput({ value, from, to, className, ...rest }: ColorOutputProps) {
   const convertedValue = Converter.convert(from, to, value);
 
   return (
-    <ul className={styles.ColorOutput}>
+    <ul className={classNames(styles.ColorOutput, className)} {...rest}>
       {Object.entries(convertedValue).map(([key, value]) => (
         <li key={key} className={styles.item}>
           <span>{key.toUpperCase()}: </span>
