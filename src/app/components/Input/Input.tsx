@@ -10,7 +10,7 @@ type InputProps<T extends Value> = Omit<
   'onChange' | 'capture'
 > & {
   value?: T;
-  onChange: (value: T, e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
   label: string;
 };
 
@@ -24,7 +24,7 @@ export function Input<T extends Value>({
   return (
     <label className={classNames(styles.Input, className)}>
       {label}
-      <input {...rest} value={value} onChange={(e) => onChange(e.target.value as T, e)} />
+      <input {...rest} value={value} onChange={(e) => onChange(e.target.value, e)} />
     </label>
   );
 }

@@ -84,10 +84,15 @@ export default function Home() {
             onChange={changeInputColorSpace}
           />
           <ColorInput
+            type={inputColorSpace}
             value={inputColorStart}
             onChange={(newValue) => setInputColorStart(newValue)}
           />
-          <ColorInput value={inputColorEnd} onChange={(newValue) => setInputColorEnd(newValue)} />
+          <ColorInput
+            type={inputColorSpace}
+            value={inputColorEnd}
+            onChange={(newValue) => setInputColorEnd(newValue)}
+          />
           <Selector
             label="Output color space"
             items={COLOR_SPACES}

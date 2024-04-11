@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ColorInput } from '.';
+import { ColorInput } from './ColorInput';
 
 describe('ColorInput', () => {
   it('should render properly', () => {
     render(
       <ColorInput
+        type="RGB"
         value={{
           r: 127,
           g: 127,
@@ -23,6 +24,7 @@ describe('ColorInput', () => {
     const handleChange = jest.fn();
     render(
       <ColorInput
+        type="RGB"
         value={{
           r: 127,
           g: 127,
