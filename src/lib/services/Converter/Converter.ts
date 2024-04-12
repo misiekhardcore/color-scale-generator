@@ -1,4 +1,6 @@
 import { ColorTypeMap } from '@/app/types';
+import { capitalize } from '@/lib/helpers';
+
 import { converters } from './converters';
 import { Converters } from './types';
 
@@ -24,10 +26,6 @@ export class Converter {
     from: T,
     to: P
   ) {
-    return `${from.toLowerCase()}To${this.capitalize(to)}` as keyof Converters;
-  }
-
-  private static capitalize(s: string) {
-    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    return `${from.toLowerCase()}To${capitalize(to)}` as keyof Converters;
   }
 }

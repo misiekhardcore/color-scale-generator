@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Converter } from '@/lib/services';
+import { Converter, Scaler } from '@/lib/services';
 import { ClickableColorOutput, ColorInput, ColorOutput, Input, Selector } from '@/app/components';
 
 import { ColorSpace, ColorTypeMap } from './types';
@@ -31,7 +31,13 @@ export default function Home() {
     useState<ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE]>(INITIAL_COLOR_START);
   const [inputColorEnd, setInputColorEnd] =
     useState<ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE]>(INITIAL_COLOR_END);
-  const scale = getRgbScale(inputColorSpace, inputColorStart, inputColorEnd, colorsNumber);
+  const scale = Scaler.getScale(
+    inputColorSpace,
+    resultsColorSpace,
+    inputColorStart,
+    inputColorEnd,
+    colorsNumber
+  );
   const hexInputColorStart = Converter.convert(inputColorSpace, 'HEX', inputColorStart);
   const hexInputColorEnd = Converter.convert(inputColorSpace, 'HEX', inputColorEnd);
 
@@ -124,35 +130,17 @@ export default function Home() {
       </form>
       <div className="flex gap-2 flex-wrap w-full items-center">
         <Selector
-          label="Results color space"
+          label="Color scale calculation space"
           items={COLOR_SPACES}
           selected={resultsColorSpace}
           onChange={changeResultsColorSpace}
         />
         <div className="flex gap-2 flex-wrap w-full items-center">
           {scale.map((color, index) => (
-            <ClickableColorOutput key={index} value={color} from="RGB" to={resultsColorSpace} />
+            <ClickableColorOutput key={index} value={color} type={resultsColorSpace} />
           ))}
         </div>
       </div>
     </main>
   );
-}
-
-function getRgbScale<T extends keyof ColorTypeMap>(
-  from: T,
-  start: ColorTypeMap[T],
-  end: ColorTypeMap[T],
-  colorsNumber: number
-) {
-  const startRgbValue = Converter.convert(from, 'RGB', start);
-  const endRgbValue = Converter.convert(from, 'RGB', end);
-  const scale: ColorTypeMap['RGB'][] = [];
-  for (let i = 0; i < colorsNumber; i++) {
-    const r = startRgbValue.r + ((endRgbValue.r - startRgbValue.r) / colorsNumber) * i;
-    const g = startRgbValue.g + ((endRgbValue.g - startRgbValue.g) / colorsNumber) * i;
-    const b = startRgbValue.b + ((endRgbValue.b - startRgbValue.b) / colorsNumber) * i;
-    scale.push({ r, g, b });
-  }
-  return scale;
 }

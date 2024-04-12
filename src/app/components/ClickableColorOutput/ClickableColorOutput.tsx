@@ -9,21 +9,16 @@ import { COLOR_SPACES } from '@/app/constants';
 
 import { SteadyClickController } from './SteadyClickController';
 
-const DEFAULT_COLOR_SPACE: keyof ColorTypeMap = 'RGB';
-
 type ClickableColorOutputProps = {
   value: ColorTypeMap[keyof ColorTypeMap];
-  from: keyof ColorTypeMap;
-  to?: keyof ColorTypeMap;
+  type: keyof ColorTypeMap;
 };
 
-export function ClickableColorOutput({ value, from, to }: ClickableColorOutputProps) {
+export function ClickableColorOutput({ value, type }: ClickableColorOutputProps) {
   const dragScrollClickFix = new SteadyClickController(setNextColorSpace);
-  const [selectedColorSpace, setSelectedColorSpace] = useState<keyof ColorTypeMap>(
-    to || DEFAULT_COLOR_SPACE
-  );
-  const convertedColor = Converter.convert(from, selectedColorSpace, value);
-  const rgbColor = Converter.convert(from, 'RGB', value);
+  const [selectedColorSpace, setSelectedColorSpace] = useState<keyof ColorTypeMap>(type);
+  const convertedColor = Converter.convert(type, selectedColorSpace, value);
+  const rgbColor = Converter.convert(type, 'RGB', value);
 
   function setNextColorSpace(e: MouseEvent<HTMLElement>) {
     if (e.target !== e.currentTarget) return;
@@ -36,8 +31,8 @@ export function ClickableColorOutput({ value, from, to }: ClickableColorOutputPr
   const textColor = getContrastColor(rgbColor);
 
   useEffect(() => {
-    setSelectedColorSpace(to || DEFAULT_COLOR_SPACE);
-  }, [to]);
+    setSelectedColorSpace(type);
+  }, [type]);
 
   return (
     <ColorOutput
