@@ -148,6 +148,7 @@ const convertersFromRgb: ConvertersFromRGB = {
           break;
       }
       h /= 6;
+      h *= 360;
     }
 
     return { h, s, l };
@@ -179,6 +180,7 @@ const convertersFromRgb: ConvertersFromRGB = {
           break;
       }
       h /= 6;
+      h *= 360;
     }
 
     return { h, s, v };

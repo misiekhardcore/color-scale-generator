@@ -1,14 +1,16 @@
 import { ColorTypeMap } from '@/app/types';
+import { capitalize } from '@/lib/helpers';
+
 import { Validators } from './types';
 import { validators } from './validators';
 
 export class Validator {
   static getValidator<T extends keyof ColorTypeMap>(type: T) {
-    const key = this.getConverterKey(type);
+    const key = this.getValidatorKey(type);
     if (!validators[key]) {
-      throw new Error(`No validator for ${type}`);
+      throw new Error(`No validator ${key} found`);
     }
-    return validators[key] as unknown as (color: ColorTypeMap[T]) => boolean;
+    return validators[key] as (color: ColorTypeMap[T]) => boolean;
   }
 
   static validate<T extends keyof ColorTypeMap>(type: T, color: ColorTypeMap[T]) {
@@ -16,11 +18,7 @@ export class Validator {
     return v(color);
   }
 
-  private static getConverterKey<T extends keyof ColorTypeMap>(type: T) {
-    return `validate${this.capitalize(type)}` as keyof Validators;
-  }
-
-  private static capitalize(s: string) {
-    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  private static getValidatorKey<T extends keyof ColorTypeMap>(type: T) {
+    return `validate${capitalize(type)}` as keyof Validators;
   }
 }
