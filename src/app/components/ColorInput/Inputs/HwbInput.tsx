@@ -1,17 +1,17 @@
-import { ColorTypeMap } from '@/app/types';
 import { Input } from '@/app/components';
+import { ColorTypeMap } from '@/app/types';
 import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'RGB';
-type KEY = 'RGB';
+const KEY = 'HWB';
+type KEY = 'HWB';
 
-export function RgbInput({ value, onChange }: InputComponentProps<KEY>) {
+export function HwbInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
-    const newRgb = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newRgb)) return;
-    onChange(newRgb);
+    const newHwb = { ...value, [key]: +newValue };
+    if (!Validator.validate(KEY, newHwb)) return;
+    onChange(newHwb);
   }
 
   function getChangeHandler<T extends keyof ColorTypeMap[KEY]>(key: T) {
@@ -21,21 +21,21 @@ export function RgbInput({ value, onChange }: InputComponentProps<KEY>) {
   return (
     <>
       <Input
-        label="R"
-        value={value.r}
-        onChange={getChangeHandler('r')}
+        label="H"
+        value={value.h}
+        onChange={getChangeHandler('h')}
         min={0}
-        max={255}
+        max={360}
         step={1}
         type="number"
       />
       <Input
-        label="G"
-        value={value.g}
-        onChange={getChangeHandler('g')}
+        label="W"
+        value={value.w}
+        onChange={getChangeHandler('w')}
         min={0}
-        max={255}
-        step={1}
+        max={1}
+        step={0.01}
         type="number"
       />
       <Input
@@ -43,8 +43,8 @@ export function RgbInput({ value, onChange }: InputComponentProps<KEY>) {
         value={value.b}
         onChange={getChangeHandler('b')}
         min={0}
-        max={255}
-        step={1}
+        max={1}
+        step={0.01}
         type="number"
       />
     </>

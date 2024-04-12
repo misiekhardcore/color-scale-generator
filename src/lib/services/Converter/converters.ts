@@ -3,9 +3,9 @@ import { Converters, ConvertersFromRGB, ConvertersToRGB } from './types';
 const convertersToRgb: ConvertersToRGB = {
   cmykToRgb: (color) => {
     const { c, m, y, k } = color;
-    const r = Math.round(255 * (1 - c) * (1 - k));
-    const g = Math.round(255 * (1 - m) * (1 - k));
-    const b = Math.round(255 * (1 - y) * (1 - k));
+    const r = 255 * (1 - c) * (1 - k);
+    const g = 255 * (1 - m) * (1 - k);
+    const b = 255 * (1 - y) * (1 - k);
     return { r, g, b };
   },
   hexToRgb: (color) => {
@@ -48,9 +48,9 @@ const convertersToRgb: ConvertersToRGB = {
       b = x;
     }
     return {
-      r: Math.round((r + m) * 255),
-      g: Math.round((g + m) * 255),
-      b: Math.round((b + m) * 255),
+      r: (r + m) * 255,
+      g: (g + m) * 255,
+      b: (b + m) * 255,
     };
   },
   hsvToRgb: (color) => {
@@ -87,9 +87,58 @@ const convertersToRgb: ConvertersToRGB = {
       b = x;
     }
     return {
-      r: Math.round((r + m) * 255),
-      g: Math.round((g + m) * 255),
-      b: Math.round((b + m) * 255),
+      r: (r + m) * 255,
+      g: (g + m) * 255,
+      b: (b + m) * 255,
+    };
+  },
+  hwbToRgb: (color) => {
+    const h = color.h / 60;
+    const w = color.w;
+    const blackness = color.b;
+
+    const i = Math.floor(h);
+    const f = h - i;
+    const v = 1 - blackness;
+    const n = w + f * (v - w);
+
+    let r: number, g: number, b: number;
+    switch (i) {
+      case 0:
+        r = v;
+        g = n;
+        b = w;
+        break;
+      case 1:
+        r = n;
+        g = v;
+        b = w;
+        break;
+      case 2:
+        r = w;
+        g = v;
+        b = n;
+        break;
+      case 3:
+        r = w;
+        g = n;
+        b = v;
+        break;
+      case 4:
+        r = n;
+        g = w;
+        b = v;
+        break;
+      default:
+        r = v;
+        g = w;
+        b = n;
+        break;
+    }
+    return {
+      r: r * 255,
+      g: g * 255,
+      b: b * 255,
     };
   },
   rgbToRgb: (color) => color,
@@ -185,6 +234,33 @@ const convertersFromRgb: ConvertersFromRGB = {
 
     return { h, s, v };
   },
+  rgbToHwb: (color) => {
+    const r = color.r / 255;
+    const g = color.g / 255;
+    const b = color.b / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const blackness = 1 - max;
+    const whiteness = min;
+
+    let hue = 0;
+    if (max !== min) {
+      if (max === r) {
+        hue = (g - b) / (max - min);
+      } else if (max === g) {
+        hue = 2 + (b - r) / (max - min);
+      } else {
+        hue = 4 + (r - g) / (max - min);
+      }
+      hue *= 60;
+      if (hue < 0) {
+        hue += 360;
+      }
+    }
+
+    return { h: hue, w: whiteness, b: blackness };
+  },
   rgbToRgb: (color) => color,
 };
 
@@ -239,8 +315,41 @@ export const converters: Converters = {
     const rgb = convertersToRgb.hslToRgb(color);
     return convertersFromRgb.rgbToCmyk(rgb);
   },
+  hwbToCmyk: (color) => {
+    const rgb = convertersToRgb.hwbToRgb(color);
+    return convertersFromRgb.rgbToCmyk(rgb);
+  },
+  hwbToHex: (color) => {
+    const rgb = convertersToRgb.hwbToRgb(color);
+    return convertersFromRgb.rgbToHex(rgb);
+  },
+  hwbToHsl: (color) => {
+    const rgb = convertersToRgb.hwbToRgb(color);
+    return convertersFromRgb.rgbToHsl(rgb);
+  },
+  hwbToHsv: (color) => {
+    const rgb = convertersToRgb.hwbToRgb(color);
+    return convertersFromRgb.rgbToHsv(rgb);
+  },
+  cmykToHwb: (color) => {
+    const rgb = convertersToRgb.cmykToRgb(color);
+    return convertersFromRgb.rgbToHwb(rgb);
+  },
+  hexToHwb: (color) => {
+    const rgb = convertersToRgb.hexToRgb(color);
+    return convertersFromRgb.rgbToHwb(rgb);
+  },
+  hslToHwb: (color) => {
+    const rgb = convertersToRgb.hslToRgb(color);
+    return convertersFromRgb.rgbToHwb(rgb);
+  },
+  hsvToHwb: (color) => {
+    const rgb = convertersToRgb.hsvToRgb(color);
+    return convertersFromRgb.rgbToHwb(rgb);
+  },
   hexToHex: (color) => color,
   hslToHsl: (color) => color,
   hsvToHsv: (color) => color,
   cmykToCmyk: (color) => color,
+  hwbToHwb: (color) => color,
 };

@@ -32,6 +32,11 @@ describe('From RGB', () => {
     expect(result).toEqual({ hex: '#7f7f7f' });
   });
 
+  it('should convert RGB to HWB', () => {
+    const result = Converter.convert('RGB', 'HWB', testRgb);
+    expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('RGB', 'UNKNOWN', testRgb)).toThrow(
@@ -71,6 +76,11 @@ describe('From CMYK', () => {
   it('should convert CMYK to HEX', () => {
     const result = Converter.convert('CMYK', 'HEX', testCmyk);
     expect(result).toEqual({ hex: '#7f7f7f' });
+  });
+
+  it('should convert CMYK to HWB', () => {
+    const result = Converter.convert('CMYK', 'HWB', testCmyk);
+    expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
   });
 
   it('should throw an error', () => {
@@ -113,6 +123,11 @@ describe('From HSL', () => {
     expect(result).toEqual({ hex: '#7f7f7f' });
   });
 
+  it('should convert HSL to HWB', () => {
+    const result = Converter.convert('HSL', 'HWB', testHsl);
+    expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HSL', 'UNKNOWN', testHsl)).toThrow(
@@ -153,6 +168,11 @@ describe('From HSV', () => {
     expect(result).toEqual({ hex: '#7f7f7f' });
   });
 
+  it('should convert HSV to HWB', () => {
+    const result = Converter.convert('HSV', 'HWB', testHsv);
+    expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HSV', 'UNKNOWN', testHsv)).toThrow(
@@ -191,10 +211,60 @@ describe('From HEX', () => {
     expect(result).toEqual(testHex);
   });
 
+  it('should convert HEX to HWB', () => {
+    const result = Converter.convert('HEX', 'HWB', testHex);
+    expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HEX', 'UNKNOWN', testHex)).toThrow(
       'No converter from HEX to UNKNOWN'
+    );
+  });
+});
+
+describe('From HWB', () => {
+  const testHwb = {
+    h: 0,
+    w: 0.5,
+    b: 0.5,
+  };
+
+  it('should convert HWB to RGB', () => {
+    const result = Converter.convert('HWB', 'RGB', testHwb);
+    expect(result).toEqual({ r: 127.5, g: 127.5, b: 127.5 });
+  });
+
+  it('should convert HWB to CMYK', () => {
+    const result = Converter.convert('HWB', 'CMYK', testHwb);
+    expect(result).toEqual({ c: 0, m: 0, y: 0, k: 0.5 });
+  });
+
+  it('should convert HWB to HSL', () => {
+    const result = Converter.convert('HWB', 'HSL', testHwb);
+    expect(result).toEqual({ h: 0, s: 0, l: 0.5 });
+  });
+
+  it('should convert HWB to HSV', () => {
+    const result = Converter.convert('HWB', 'HSV', testHwb);
+    expect(result).toEqual({ h: 0, s: 0, v: 0.5 });
+  });
+
+  it('should convert HWB to HEX', () => {
+    const result = Converter.convert('HWB', 'HEX', testHwb);
+    expect(result).toEqual({ hex: '#808080' });
+  });
+
+  it('should convert HWB to HWB', () => {
+    const result = Converter.convert('HWB', 'HWB', testHwb);
+    expect(result).toEqual(testHwb);
+  });
+
+  it('should throw an error', () => {
+    // @ts-expect-error Testing invalid input
+    expect(() => Converter.convert('HWB', 'UNKNOWN', testHwb)).toThrow(
+      'No converter from HWB to UNKNOWN'
     );
   });
 });
