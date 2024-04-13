@@ -53,6 +53,26 @@ export const scalers: Scalers = {
     }
     return scale;
   },
+  getScaleHwb: (startColor, endColor, colorsNumber) => {
+    const scale: ColorTypeMap['HWB'][] = [];
+    const diffH = (endColor.h - startColor.h) / (colorsNumber - 1);
+    const diffW = (endColor.w - startColor.w) / (colorsNumber - 1);
+    const diffB = (endColor.b - startColor.b) / (colorsNumber - 1);
+    scale.push(startColor);
+    for (let i = 1; i < colorsNumber; i++) {
+      const h = startColor.h + diffH * i;
+      const w = startColor.w + diffW * i;
+      const b = startColor.b + diffB * i;
+      scale.push({ h, w, b });
+    }
+    return scale;
+  },
+  getScaleRal: (startColor, endColor, colorsNumber) => {
+    const startColorRgb = Converter.convert('RAL', 'RGB', startColor);
+    const endColorRgb = Converter.convert('RAL', 'RGB', endColor);
+    const scaleRgb = getScaleRgb(startColorRgb, endColorRgb, colorsNumber);
+    return scaleRgb.map((color) => Converter.convert('RGB', 'RAL', color));
+  },
   getScaleRgb,
 };
 

@@ -93,6 +93,32 @@ describe('Scaler', () => {
     ]);
   });
 
+  it('should get HWB scale', () => {
+    const scale = Scaler.getScale(
+      'RGB',
+      'HWB',
+      { r: 0, g: 0, b: 0 },
+      { r: 255, g: 255, b: 255 },
+      3
+    );
+    expect(scale).toMatchObject([
+      { h: 0, w: 0, b: 1 },
+      { h: 0, w: 0.5, b: 0.5 },
+      { h: 0, w: 1, b: 0 },
+    ]);
+  });
+
+  it('should get RAL scale', () => {
+    const scale = Scaler.getScale(
+      'RGB',
+      'RAL',
+      { r: 0, g: 0, b: 0 },
+      { r: 255, g: 255, b: 255 },
+      3
+    );
+    expect(scale).toMatchObject([{ ral: 9005 }, { ral: 7023 }, { ral: 9016 }]);
+  });
+
   it('should throw an error if scaler not found', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input

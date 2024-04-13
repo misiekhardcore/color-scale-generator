@@ -16,4 +16,10 @@ export const validators: Validators = {
   validateRgb: ({ r, g, b }) => {
     return r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255;
   },
+  validateHwb: ({ h, w, b }) => {
+    return h >= 0 && h < 360 && w >= 0 && w <= 1 && b >= 0 && b <= 1;
+  },
+  validateRal: ({ ral }) => {
+    return ral >= 0 && ral <= 9999;
+  },
 };

@@ -10,14 +10,18 @@ import { COLOR_SPACES } from './constants';
 
 const INITIAL_RESULTS_COUNT = 10;
 const MAX_RESULTS_COUNT = 100;
-const INITIAL_INPUT_COLOR_SPACE: keyof ColorTypeMap = 'HEX';
-const INITIAL_OUTPUT_COLOR_SPACE: keyof ColorTypeMap = 'RGB';
+const INITIAL_INPUT_COLOR_SPACE: keyof ColorTypeMap = 'RGB';
+const INITIAL_OUTPUT_COLOR_SPACE: keyof ColorTypeMap = 'RAL';
 
 const INITIAL_COLOR_START: ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE] = {
-  hex: '#000000',
+  r: 255,
+  g: 0,
+  b: 0,
 };
 const INITIAL_COLOR_END: ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE] = {
-  hex: '#FFFFFF',
+  r: 0,
+  g: 255,
+  b: 0,
 };
 
 export default function Home() {
