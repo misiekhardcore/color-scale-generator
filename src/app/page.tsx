@@ -11,7 +11,7 @@ import { COLOR_SPACES } from './constants';
 const INITIAL_RESULTS_COUNT = 10;
 const MAX_RESULTS_COUNT = 100;
 const INITIAL_INPUT_COLOR_SPACE: keyof ColorTypeMap = 'RGB';
-const INITIAL_OUTPUT_COLOR_SPACE: keyof ColorTypeMap = 'HWB';
+const INITIAL_OUTPUT_COLOR_SPACE: keyof ColorTypeMap = 'RAL';
 
 const INITIAL_COLOR_START: ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE] = {
   r: 255,

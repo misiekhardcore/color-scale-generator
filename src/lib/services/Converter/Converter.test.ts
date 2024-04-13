@@ -37,6 +37,11 @@ describe('From RGB', () => {
     expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
   });
 
+  it('should convert RGB to RAL', () => {
+    const result = Converter.convert('RGB', 'RAL', testRgb);
+    expect(result).toEqual({ ral: 7037 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('RGB', 'UNKNOWN', testRgb)).toThrow(
@@ -81,6 +86,11 @@ describe('From CMYK', () => {
   it('should convert CMYK to HWB', () => {
     const result = Converter.convert('CMYK', 'HWB', testCmyk);
     expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
+  it('should convert CMYK to RAL', () => {
+    const result = Converter.convert('CMYK', 'RAL', testCmyk);
+    expect(result).toEqual({ ral: 7037 });
   });
 
   it('should throw an error', () => {
@@ -128,6 +138,11 @@ describe('From HSL', () => {
     expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
   });
 
+  it('should convert HSL to RAL', () => {
+    const result = Converter.convert('HSL', 'RAL', testHsl);
+    expect(result).toEqual({ ral: 7037 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HSL', 'UNKNOWN', testHsl)).toThrow(
@@ -173,6 +188,11 @@ describe('From HSV', () => {
     expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
   });
 
+  it('should convert HSV to RAL', () => {
+    const result = Converter.convert('HSV', 'RAL', testHsv);
+    expect(result).toEqual({ ral: 7037 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HSV', 'UNKNOWN', testHsv)).toThrow(
@@ -214,6 +234,11 @@ describe('From HEX', () => {
   it('should convert HEX to HWB', () => {
     const result = Converter.convert('HEX', 'HWB', testHex);
     expect(result).toEqual({ h: 0, w: 0.4980392156862745, b: 0.5019607843137255 });
+  });
+
+  it('should convert HEX to RAL', () => {
+    const result = Converter.convert('HEX', 'RAL', testHex);
+    expect(result).toEqual({ ral: 7037 });
   });
 
   it('should throw an error', () => {
@@ -261,10 +286,68 @@ describe('From HWB', () => {
     expect(result).toEqual(testHwb);
   });
 
+  it('should convert HWB to RAL', () => {
+    const result = Converter.convert('HWB', 'RAL', testHwb);
+    expect(result).toEqual({ ral: 9022 });
+  });
+
   it('should throw an error', () => {
     // @ts-expect-error Testing invalid input
     expect(() => Converter.convert('HWB', 'UNKNOWN', testHwb)).toThrow(
       'No converter from HWB to UNKNOWN'
+    );
+  });
+});
+
+describe('From RAL', () => {
+  const testRal = {
+    ral: 7037,
+  };
+
+  it('should convert RAL to RGB', () => {
+    const result = Converter.convert('RAL', 'RGB', testRal);
+    expect(result).toEqual({ r: 122, g: 123, b: 122 });
+  });
+
+  it('should convert RAL to CMYK', () => {
+    const result = Converter.convert('RAL', 'CMYK', testRal);
+    expect(result).toEqual({
+      c: 0.008130081300812978,
+      m: 0,
+      y: 0.008130081300812978,
+      k: 0.5176470588235293,
+    });
+  });
+
+  it('should convert RAL to HSL', () => {
+    const result = Converter.convert('RAL', 'HSL', testRal);
+    expect(result).toEqual({ h: 120, s: 0.00408163265306121, l: 0.4803921568627451 });
+  });
+
+  it('should convert RAL to HSV', () => {
+    const result = Converter.convert('RAL', 'HSV', testRal);
+    expect(result).toEqual({ h: 120, s: 0.00813008130081298, v: 0.4823529411764706 });
+  });
+
+  it('should convert RAL to HEX', () => {
+    const result = Converter.convert('RAL', 'HEX', testRal);
+    expect(result).toEqual({ hex: '#7a7b7a' });
+  });
+
+  it('should convert RAL to HWB', () => {
+    const result = Converter.convert('RAL', 'HWB', testRal);
+    expect(result).toEqual({ h: 120, w: 0.47843137254901963, b: 0.5176470588235293 });
+  });
+
+  it('should convert RAL to RAL', () => {
+    const result = Converter.convert('RAL', 'RAL', testRal);
+    expect(result).toEqual(testRal);
+  });
+
+  it('should throw an error', () => {
+    // @ts-expect-error Testing invalid input
+    expect(() => Converter.convert('RAL', 'UNKNOWN', testRal)).toThrow(
+      'No converter from RAL to UNKNOWN'
     );
   });
 });

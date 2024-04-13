@@ -8,6 +8,7 @@ import { CmykInput } from './CmykInput';
 import { HslInput } from './HslInput';
 import { HsvInput } from './HsvInput';
 import { HwbInput } from './HwbInput';
+import { RalInput } from './RalInput';
 
 export type { InputComponentProps };
 
@@ -20,4 +21,5 @@ export const inputComponents: {
   HEX: HexInput,
   HSL: HslInput,
   HWB: HwbInput,
+  RAL: RalInput,
 };

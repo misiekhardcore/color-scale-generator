@@ -1,4 +1,28 @@
+import { RGB } from '@/app/types';
+
 import { Converters, ConvertersFromRGB, ConvertersToRGB } from './types';
+
+import ralrgb from './RAL-RGB.json';
+
+function findClosestRal(color: RGB) {
+  let closestRal = 0;
+  let smallestDistance = Infinity;
+
+  ralrgb.forEach((item) => {
+    const distance = Math.sqrt(
+      Math.pow(item.RGB.r - color.r, 2) +
+        Math.pow(item.RGB.g - color.g, 2) +
+        Math.pow(item.RGB.b - color.b, 2)
+    );
+
+    if (distance < smallestDistance) {
+      smallestDistance = distance;
+      closestRal = item.RAL;
+    }
+  });
+
+  return { ral: closestRal };
+}
 
 const convertersToRgb: ConvertersToRGB = {
   cmykToRgb: (color) => {
@@ -141,6 +165,10 @@ const convertersToRgb: ConvertersToRGB = {
       b: b * 255,
     };
   },
+  ralToRgb: (color) => {
+    const ral = ralrgb.find((item) => item.RAL === color.ral);
+    return ral ? ral.RGB : { r: 0, g: 0, b: 0 };
+  },
   rgbToRgb: (color) => color,
 };
 
@@ -261,6 +289,9 @@ const convertersFromRgb: ConvertersFromRGB = {
 
     return { h: hue, w: whiteness, b: blackness };
   },
+  rgbToRal: (color) => {
+    return findClosestRal(color);
+  },
   rgbToRgb: (color) => color,
 };
 
@@ -347,9 +378,50 @@ export const converters: Converters = {
     const rgb = convertersToRgb.hsvToRgb(color);
     return convertersFromRgb.rgbToHwb(rgb);
   },
+  ralToHex: (color) => {
+    const rgb = convertersToRgb.ralToRgb(color);
+    return convertersFromRgb.rgbToHex(rgb);
+  },
+  ralToHsl: (color) => {
+    const rgb = convertersToRgb.ralToRgb(color);
+    return convertersFromRgb.rgbToHsl(rgb);
+  },
+  ralToHsv: (color) => {
+    const rgb = convertersToRgb.ralToRgb(color);
+    return convertersFromRgb.rgbToHsv(rgb);
+  },
+  ralToCmyk: (color) => {
+    const rgb = convertersToRgb.ralToRgb(color);
+    return convertersFromRgb.rgbToCmyk(rgb);
+  },
+  ralToHwb: (color) => {
+    const rgb = convertersToRgb.ralToRgb(color);
+    return convertersFromRgb.rgbToHwb(rgb);
+  },
+  cmykToRal: (color) => {
+    const rgb = convertersToRgb.cmykToRgb(color);
+    return convertersFromRgb.rgbToRal(rgb);
+  },
+  hexToRal: (color) => {
+    const rgb = convertersToRgb.hexToRgb(color);
+    return convertersFromRgb.rgbToRal(rgb);
+  },
+  hslToRal: (color) => {
+    const rgb = convertersToRgb.hslToRgb(color);
+    return convertersFromRgb.rgbToRal(rgb);
+  },
+  hsvToRal: (color) => {
+    const rgb = convertersToRgb.hsvToRgb(color);
+    return convertersFromRgb.rgbToRal(rgb);
+  },
+  hwbToRal: (color) => {
+    const rgb = convertersToRgb.hwbToRgb(color);
+    return convertersFromRgb.rgbToRal(rgb);
+  },
   hexToHex: (color) => color,
   hslToHsl: (color) => color,
   hsvToHsv: (color) => color,
   cmykToCmyk: (color) => color,
   hwbToHwb: (color) => color,
+  ralToRal: (color) => color,
 };

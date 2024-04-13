@@ -1,1 +1,1 @@
-export const COLOR_SPACES = ['RGB', 'CMYK', 'HSL', 'HSV', 'HEX', 'HWB'] as const;
+export const COLOR_SPACES = ['RGB', 'CMYK', 'HSL', 'HSV', 'HEX', 'HWB', 'RAL'] as const;

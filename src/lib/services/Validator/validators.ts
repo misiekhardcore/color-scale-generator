@@ -19,4 +19,7 @@ export const validators: Validators = {
   validateHwb: ({ h, w, b }) => {
     return h >= 0 && h < 360 && w >= 0 && w <= 1 && b >= 0 && b <= 1;
   },
+  validateRal: ({ ral }) => {
+    return ral >= 0 && ral <= 9999;
+  },
 };

@@ -108,6 +108,17 @@ describe('Scaler', () => {
     ]);
   });
 
+  it('should get RAL scale', () => {
+    const scale = Scaler.getScale(
+      'RGB',
+      'RAL',
+      { r: 0, g: 0, b: 0 },
+      { r: 255, g: 255, b: 255 },
+      3
+    );
+    expect(scale).toMatchObject([{ ral: 9005 }, { ral: 7023 }, { ral: 9016 }]);
+  });
+
   it('should throw an error if scaler not found', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input

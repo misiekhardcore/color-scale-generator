@@ -67,6 +67,12 @@ export const scalers: Scalers = {
     }
     return scale;
   },
+  getScaleRal: (startColor, endColor, colorsNumber) => {
+    const startColorRgb = Converter.convert('RAL', 'RGB', startColor);
+    const endColorRgb = Converter.convert('RAL', 'RGB', endColor);
+    const scaleRgb = getScaleRgb(startColorRgb, endColorRgb, colorsNumber);
+    return scaleRgb.map((color) => Converter.convert('RGB', 'RAL', color));
+  },
   getScaleRgb,
 };
 
