@@ -15,4 +15,14 @@ describe('Button', () => {
     screen.getByRole('button').click();
     expect(handleClick).toHaveBeenCalled();
   });
+
+  it('should render with variant', () => {
+    render(<Button variant="secondary">click me</Button>);
+    expect(screen.getByRole('button')).toHaveClass('secondary');
+  });
+
+  it('should render with size', () => {
+    render(<Button size="sm">click me</Button>);
+    expect(screen.getByRole('button')).toHaveClass('sm');
+  });
 });

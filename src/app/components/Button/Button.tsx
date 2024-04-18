@@ -1,10 +1,16 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import classNames from 'classnames';
 
-import styles from './Button.module.scss';
+import './Button.scss';
 
-type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type Variant = 'primary' | 'secondary' | 'success' | 'danger';
+type Size = 'sm' | 'md' | 'lg';
 
-export function Button({ className, ...props }: ButtonProps) {
-  return <button className={classNames(styles.Button, className)} {...props} />;
+type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
+  variant?: Variant;
+  size?: Size;
+};
+
+export function Button({ className, size = 'md', variant = 'primary', ...props }: ButtonProps) {
+  return <button className={classNames('Button', className, size, variant)} {...props} />;
 }
