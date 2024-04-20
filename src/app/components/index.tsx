@@ -5,3 +5,4 @@ export { ColorInput } from './ColorInput';
 export { Button } from './Button';
 export { ClickableColorOutput } from './ClickableColorOutput';
 export { Modal, useModal } from './Modal';
+export { ExportModal } from './ExportModal';

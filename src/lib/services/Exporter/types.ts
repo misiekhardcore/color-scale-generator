@@ -7,7 +7,16 @@ export type ExporterFunction<T extends keyof ColorTypeMap = keyof ColorTypeMap> 
   scale: ColorTypeMap[T][]
 ) => string[];
 
-type ExporterType = 'CssHex' | 'CssRgb' | 'SassHex' | 'SassRgb';
+type ExporterType =
+  | Capitalize<Lowercase<keyof ColorTypeMap>>
+  | 'CssHex'
+  | 'CssRgb'
+  | 'CssHsl'
+  | 'CssHwb'
+  | 'SassHex'
+  | 'SassRgb'
+  | 'SassHsl'
+  | 'SassHwb';
 
 export type Exporters = {
   [Key in ExporterType as ExporterKey<string & Key>]: ExporterFunction;

@@ -16,7 +16,7 @@ describe('Exporter', () => {
       { r: 0, g: 0, b: 0 },
       { r: 255, g: 255, b: 255 },
     ]);
-    expect(result).toEqual(['--color-1: #000000;', '--color-2: #ffffff;']);
+    expect(result).toEqual(['--color-1: #000000;', '--color-2: #FFFFFF;']);
   });
 
   it('should export rgb to css', () => {
@@ -32,7 +32,7 @@ describe('Exporter', () => {
       { hex: '#123123' },
       { hex: '#321312' },
     ]);
-    expect(result).toEqual(['$color-1: #123123);', '$color-2: #321312);']);
+    expect(result).toEqual(['$color-1: #123123;', '$color-2: #321312;']);
   });
 
   it('should export rgb to sass', () => {

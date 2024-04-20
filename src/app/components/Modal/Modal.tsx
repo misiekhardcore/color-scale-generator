@@ -1,6 +1,8 @@
-import { MouseEvent, ReactNode, createContext, useContext } from 'react';
+import classNames from 'classnames';
+import { ComponentProps, MouseEvent, ReactNode, createContext, useContext } from 'react';
+import { createPortal } from 'react-dom';
 
-type ModalProps = {
+type ModalProps = ComponentProps<'div'> & {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
@@ -16,7 +18,7 @@ export function useModal() {
   return context;
 }
 
-export function Modal({ children, open, onClose }: ModalProps) {
+export function Modal({ children, open, onClose, className }: ModalProps) {
   if (!open) {
     return null;
   }
@@ -27,7 +29,7 @@ export function Modal({ children, open, onClose }: ModalProps) {
     }
   }
 
-  return (
+  return createPortal(
     <ModalContext.Provider value={{ children, open, onClose }}>
       <div className="relative z-10">
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -37,32 +39,64 @@ export function Modal({ children, open, onClose }: ModalProps) {
             onClick={onBackgroundClick}
           >
             <div
+              style={{ maxHeight: 'calc(100vh - 4rem)' }}
               role="dialog"
-              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              className={classNames(
+                'relative flex flex-col transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg',
+                className
+              )}
             >
               {children}
             </div>
           </div>
         </div>
       </div>
-    </ModalContext.Provider>
+    </ModalContext.Provider>,
+    document.body
   );
 }
 
-Modal.Body = function ModalBody({ children }: { children: ReactNode }) {
+Modal.Body = function ModalBody({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-      <div className="sm:flex sm:items-start">{children}</div>
+    <div
+      className={classNames('bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 overflow-y-auto', className)}
+    >
+      {children}
     </div>
   );
 };
 
-Modal.Footer = function ModalFooter({ children }: { children: ReactNode }) {
+Modal.Footer = function ModalFooter({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row sm:px-6 justify-end">{children}</div>
+    <div
+      className={classNames(
+        'bg-gray-50 px-4 py-3 sm:flex sm:flex-row sm:px-6 justify-end',
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 };
 
-Modal.Header = function ModalHeader({ children }: { children: ReactNode }) {
-  return <div className="bg-gray-50 px-4 py-3 sm:px-6">{children}</div>;
+Modal.Header = function ModalHeader({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={classNames('bg-gray-50 px-4 py-3 sm:px-6', className)}>{children}</div>;
 };
