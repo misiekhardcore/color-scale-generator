@@ -3,7 +3,15 @@
 import { useState } from 'react';
 
 import { Converter, Scaler } from '@/lib/services';
-import { ClickableColorOutput, ColorInput, ColorOutput, Input, Selector } from '@/app/components';
+import {
+  Button,
+  ClickableColorOutput,
+  ColorInput,
+  ColorOutput,
+  ExportModal,
+  Input,
+  Selector,
+} from '@/app/components';
 
 import { ColorSpace, ColorTypeMap } from './types';
 import { COLOR_SPACES } from './constants';
@@ -35,6 +43,7 @@ export default function Home() {
     useState<ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE]>(INITIAL_COLOR_START);
   const [inputColorEnd, setInputColorEnd] =
     useState<ColorTypeMap[typeof INITIAL_INPUT_COLOR_SPACE]>(INITIAL_COLOR_END);
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const scale = Scaler.getScale(
     inputColorSpace,
     resultsColorSpace,
@@ -130,6 +139,7 @@ export default function Home() {
             max={MAX_RESULTS_COUNT}
             type="number"
           />
+          <Button onClick={() => setIsExportModalOpen(true)}>Export scale</Button>
         </div>
       </form>
       <div className="flex gap-2 flex-wrap w-full items-center">
@@ -145,6 +155,12 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <ExportModal
+        open={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        from={resultsColorSpace}
+        scale={scale}
+      />
     </main>
   );
 }
