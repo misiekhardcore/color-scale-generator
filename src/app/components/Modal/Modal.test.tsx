@@ -1,5 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+
 import { Modal, useModal } from './Modal';
+
+console.error = jest.fn();
 
 describe('Modal', () => {
   it('should render', () => {

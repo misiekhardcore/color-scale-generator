@@ -83,7 +83,9 @@ export default function Home() {
     <main className="flex flex-col gap-2 p-2 max-w-screen-xl">
       <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 justify-center">
         <div className="grid grid-cols-3 gap-2 items-start">
-          <div />
+          <Button onClick={() => setIsExportModalOpen(true)} className="self-end">
+            Export scale
+          </Button>
           <Input
             label="Color"
             type="color"
@@ -134,12 +136,11 @@ export default function Home() {
             className="col-span-3"
             value={colorsNumber.toString()}
             onChange={(value) => setColorsNumber(parseInt(value))}
-            label="How many results"
+            label="Colors in scale"
             min={1}
             max={MAX_RESULTS_COUNT}
             type="number"
           />
-          <Button onClick={() => setIsExportModalOpen(true)}>Export scale</Button>
         </div>
       </form>
       <div className="flex gap-2 flex-wrap w-full items-center">
