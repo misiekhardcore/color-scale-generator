@@ -6,6 +6,8 @@ import { ColorTypeMap } from '@/app/types';
 import { Exporter, Exporters, exporters } from '@/lib/services';
 import { Button, Modal, Selector } from '@/app/components';
 
+import { CopyButton } from './CopyButton';
+
 type ExportModalProps<T extends keyof ColorTypeMap> = {
   open: boolean;
   onClose: () => void;
@@ -22,7 +24,8 @@ export function ExportModal<T extends keyof ColorTypeMap>({
   scale,
 }: ExportModalProps<T>) {
   const [selectedExporter, setSelectedExporter] = useState<keyof Exporters>(DEFAULT_EXPORTER);
-  const exportScale = Exporter.export(from, selectedExporter, scale);
+  const exportScale = Exporter.export(from, selectedExporter, scale).join('\n');
+
   return (
     <Modal open={open} onClose={onClose}>
       <Modal.Header>
@@ -30,13 +33,14 @@ export function ExportModal<T extends keyof ColorTypeMap>({
       </Modal.Header>
       <Modal.Body>
         <div className="flex flex-col gap-2 w-full">
+          <CopyButton text={exportScale} />
           <Selector
             items={Object.keys(exporters) as (keyof Exporters)[]}
             selected={selectedExporter}
             onChange={setSelectedExporter}
             label="Format"
           />
-          <pre className="bg-gray-100 p-4 rounded overflow-y-auto">{exportScale.join('\n')}</pre>
+          <pre className="bg-gray-100 p-4 rounded overflow-y-auto">{exportScale}</pre>
         </div>
       </Modal.Body>
       <Modal.Footer>
