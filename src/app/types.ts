@@ -1,4 +1,4 @@
-import { COLOR_SPACES } from './constants';
+import type { COLOR_SPACES } from './constants';
 
 export type ColorSpace = (typeof COLOR_SPACES)[number];
 
