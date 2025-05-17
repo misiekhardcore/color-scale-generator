@@ -10,6 +10,8 @@ import { HsvInput } from './HsvInput';
 import { HwbInput } from './HwbInput';
 import { RalInput } from './RalInput';
 
+import type { JSX } from 'react';
+
 export type { InputComponentProps };
 
 export const inputComponents: {

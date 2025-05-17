@@ -2,7 +2,7 @@ import { ColorTypeMap } from '@/app/types';
 
 import { inputComponents, InputComponentProps } from './Inputs';
 
-import styles from './ColorInput.module.scss';
+import type { JSX } from 'react';
 
 interface ColorInputProps<T extends keyof ColorTypeMap = keyof ColorTypeMap>
   extends InputComponentProps<T> {
@@ -12,7 +12,7 @@ interface ColorInputProps<T extends keyof ColorTypeMap = keyof ColorTypeMap>
 export function ColorInput({ value, onChange, type }: ColorInputProps) {
   const InputComponent = getInputComponent(type);
   return (
-    <div className={styles.ColorInput}>
+    <div className="flex flex-col gap-2">
       <InputComponent value={value} onChange={onChange} />
     </div>
   );

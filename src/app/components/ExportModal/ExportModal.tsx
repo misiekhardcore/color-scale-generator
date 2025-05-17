@@ -40,7 +40,7 @@ export function ExportModal<T extends keyof ColorTypeMap>({
             onChange={setSelectedExporter}
             label="Format"
           />
-          <pre className="bg-gray-100 p-4 rounded overflow-y-auto">{exportScale}</pre>
+          <pre className="bg-gray-100 p-4 rounded-sm overflow-y-auto">{exportScale}</pre>
         </div>
       </Modal.Body>
       <Modal.Footer>

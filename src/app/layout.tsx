@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import './globals.scss';
+import './index.css';
 
 export const metadata: Metadata = {
   title: 'Color Scale Generator',

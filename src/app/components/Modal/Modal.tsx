@@ -42,7 +42,7 @@ export function Modal({ children, open, onClose, className }: ModalProps) {
               style={{ maxHeight: 'calc(100vh - 4rem)' }}
               role="dialog"
               className={classNames(
-                'relative flex flex-col transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg',
+                'relative flex flex-col transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg',
                 className
               )}
             >
@@ -65,7 +65,7 @@ Modal.Body = function ModalBody({
 }) {
   return (
     <div
-      className={classNames('bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 overflow-y-auto', className)}
+      className={classNames('px-4 pb-4 pt-5 sm:p-6 sm:pb-4 overflow-y-auto', className)}
     >
       {children}
     </div>

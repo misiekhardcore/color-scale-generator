@@ -5,7 +5,8 @@ import { Button } from './Button';
 describe('Button', () => {
   it('should render', () => {
     render(<Button>click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('Button');
+    expect(screen.getByRole('button')).toHaveClass('bg-blue-500');
+    expect(screen.getByRole('button')).toHaveClass('hover:bg-blue-700');
     expect(screen.getByRole('button')).toHaveTextContent('click me');
   });
 
@@ -18,11 +19,12 @@ describe('Button', () => {
 
   it('should render with variant', () => {
     render(<Button variant="secondary">click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('secondary');
+    expect(screen.getByRole('button')).toHaveClass('bg-gray-500');
+    expect(screen.getByRole('button')).toHaveClass('hover:bg-gray-700');
   });
 
   it('should render with size', () => {
     render(<Button size="sm">click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('sm');
+    expect(screen.getByRole('button')).toHaveClass('text-sm');
   });
 });

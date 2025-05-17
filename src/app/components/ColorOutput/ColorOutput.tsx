@@ -5,24 +5,22 @@ import { ColorTypeMap } from '@/app/types';
 import { isNumber } from '@/lib/helpers';
 import { Converter } from '@/lib/services';
 
-import styles from './ColorOutput.module.scss';
-
 const MAX_DECIMALS = 3;
 
-type ColorOutputProps = DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> & {
+interface ColorOutputProps extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
   value: ColorTypeMap[keyof ColorTypeMap];
   from: keyof ColorTypeMap;
   to: keyof ColorTypeMap;
-};
+}
 
 export function ColorOutput({ value, from, to, className, ...rest }: ColorOutputProps) {
   const convertedValue = Converter.convert(from, to, value);
 
   return (
-    <ul className={classNames(styles.ColorOutput, className)} {...rest}>
+    <ul className={classNames('flex flex-col border-2 p-2 rounded-sm justify-center min-w-[150px]', className)} {...rest}>
       {Object.entries(convertedValue).map(([key, value]) => (
-        <li key={key} className={styles.item}>
-          <span>{key.toUpperCase()}: </span>
+        <li key={key} className="p-1 pointer-events-none">
+          <span className="font-bold">{key.toUpperCase()}: </span>
           {formatValue(value)}
         </li>
       ))}

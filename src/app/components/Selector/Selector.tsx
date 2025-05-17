@@ -1,17 +1,15 @@
 import { isNumber } from '@/lib/helpers';
-
-import styles from './Selector.module.scss';
 import classNames from 'classnames';
 
 type Value = string | number | undefined;
 
-type SelectorProps<T extends Value> = {
+interface SelectorProps<T extends Value> {
   label: string;
   items: readonly T[];
   selected: T;
   onChange: (value: T) => void;
   className?: string;
-};
+}
 
 export function Selector<T extends Value>({
   items,
@@ -21,9 +19,10 @@ export function Selector<T extends Value>({
   className,
 }: SelectorProps<T>) {
   return (
-    <label className={classNames(styles.Selector, className)}>
+    <label className={classNames('flex flex-col gap-1', className)}>
       {label}
       <select
+        className="w-full"
         value={selected}
         onChange={({ target: { value } }) => onChange((isNumber(value) ? +value : value) as T)}
       >

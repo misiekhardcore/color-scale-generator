@@ -80,7 +80,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col gap-2 p-2 max-w-screen-xl">
+    <main className="flex flex-col gap-2 p-2 max-w-(--breakpoint-xl)">
       <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 justify-center">
         <div className="grid grid-cols-3 gap-2 items-start">
           <Button onClick={() => setIsExportModalOpen(true)} className="self-end">
