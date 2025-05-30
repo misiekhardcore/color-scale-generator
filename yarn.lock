@@ -1880,12 +1880,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.15.18":
-  version: 22.15.18
-  resolution: "@types/node@npm:22.15.18"
+"@types/node@npm:22.15.23":
+  version: 22.15.23
+  resolution: "@types/node@npm:22.15.23"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/e23178c568e2dc6b93b6aa3b8dfb45f9556e527918c947fe7406a4c92d2184c7396558912400c3b1b8d0fa952ec63819aca2b8e4d3545455fc6f1e9623e09ca6
+  checksum: 10c0/e3ae0629dfb4357dad2a7838c481656abf089d852d83f0d0f14368f03ad21ce276cbecfdf62be2276ef39920db6b114e5bc8d87c37714bbab9aefb0ce1eb1473
   languageName: node
   linkType: hard
 
@@ -1898,12 +1898,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:19.1.4":
-  version: 19.1.4
-  resolution: "@types/react@npm:19.1.4"
+"@types/react@npm:19.1.6":
+  version: 19.1.6
+  resolution: "@types/react@npm:19.1.6"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/501350d4f9cef13c5dd1b1496fa70ebaff52f6fa359b623b51c9d817e5bc4333fa3c8b7a6a4cbc88c643385052d66a243c3ceccfd6926062f917a2dd0535f6b3
+  checksum: 10c0/8b10b198e28997b3c57559750f8bcf5ae7b33c554b16b6f4fe2ece1d4de6a2fc8cb53e7effe08ec9cb939d2f479eb97c5e08aac2cf83b10a90164fe451cc8ea2
   languageName: node
   linkType: hard
 
@@ -2999,8 +2999,8 @@ __metadata:
     "@testing-library/react": "npm:16.3.0"
     "@types/eslint__eslintrc": "npm:3.3.0"
     "@types/jest": "npm:29.5.14"
-    "@types/node": "npm:22.15.18"
-    "@types/react": "npm:19.1.4"
+    "@types/node": "npm:22.15.23"
+    "@types/react": "npm:19.1.6"
     "@types/react-dom": "npm:19.1.5"
     "@typescript-eslint/eslint-plugin": "npm:8.32.1"
     "@typescript-eslint/parser": "npm:8.32.1"
@@ -3009,7 +3009,7 @@ __metadata:
     eslint-config-next: "npm:15.3.2"
     eslint-config-prettier: "npm:10.1.5"
     eslint-plugin-prettier: "npm:5.4.0"
-    eslint-plugin-testing-library: "npm:7.2.0"
+    eslint-plugin-testing-library: "npm:7.2.2"
     husky: "npm:9.1.7"
     jest: "npm:29.7.0"
     jest-environment-jsdom: "npm:29.7.0"
@@ -4028,15 +4028,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-testing-library@npm:7.2.0":
-  version: 7.2.0
-  resolution: "eslint-plugin-testing-library@npm:7.2.0"
+"eslint-plugin-testing-library@npm:7.2.2":
+  version: 7.2.2
+  resolution: "eslint-plugin-testing-library@npm:7.2.2"
   dependencies:
     "@typescript-eslint/scope-manager": "npm:^8.15.0"
     "@typescript-eslint/utils": "npm:^8.15.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
-  checksum: 10c0/424e4ecc3f6b6bbf033be5b48f27b66a4e34ccb4bb673117deb51ebb7ab16a4a788e3212f0d8b6632f55103ca56c0ce6d209c903c5c7a3cf2012f07b2d4c3dd9
+  checksum: 10c0/51b5b6a3bb6b08c0e1fbb90678b701e94d20b0493bf5572f217cf75b13ac54e813ad0595537e2c8254589d977cb719aa4610d5aac4c1def6510a69c52fcfe908
   languageName: node
   linkType: hard
 
