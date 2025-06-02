@@ -1,12 +1,19 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import classNames from 'classnames';
 
-interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+interface ButtonProps
+  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'success' | 'danger';
   size?: 'sm' | 'md' | 'lg';
 }
 
-export function Button({ className, size = 'md', variant = 'primary', disabled, ...props }: ButtonProps) {
+export function Button({
+  className,
+  size = 'md',
+  variant = 'primary',
+  disabled,
+  ...props
+}: ButtonProps) {
   const baseClasses = 'block font-bold rounded-sm';
   const variantClasses = {
     primary: 'bg-blue-500 hover:bg-blue-700 text-white',

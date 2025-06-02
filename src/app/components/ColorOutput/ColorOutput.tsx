@@ -7,7 +7,8 @@ import { Converter } from '@/lib/services';
 
 const MAX_DECIMALS = 3;
 
-interface ColorOutputProps extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
+interface ColorOutputProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
   value: ColorTypeMap[keyof ColorTypeMap];
   from: keyof ColorTypeMap;
   to: keyof ColorTypeMap;
@@ -17,7 +18,13 @@ export function ColorOutput({ value, from, to, className, ...rest }: ColorOutput
   const convertedValue = Converter.convert(from, to, value);
 
   return (
-    <ul className={classNames('flex flex-col border-2 p-2 rounded-sm justify-center min-w-[150px]', className)} {...rest}>
+    <ul
+      className={classNames(
+        'flex flex-col border-2 p-2 rounded-sm justify-center min-w-[150px]',
+        className
+      )}
+      {...rest}
+    >
       {Object.entries(convertedValue).map(([key, value]) => (
         <li key={key} className="p-1 pointer-events-none">
           <span className="font-bold">{key.toUpperCase()}: </span>
