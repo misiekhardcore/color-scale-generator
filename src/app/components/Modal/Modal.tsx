@@ -64,9 +64,7 @@ Modal.Body = function ModalBody({
   className?: string;
 }) {
   return (
-    <div
-      className={classNames('px-4 pb-4 pt-5 sm:p-6 sm:pb-4 overflow-y-auto', className)}
-    >
+    <div className={classNames('px-4 pb-4 pt-5 sm:p-6 sm:pb-4 overflow-y-auto', className)}>
       {children}
     </div>
   );
