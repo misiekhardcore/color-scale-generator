@@ -1,6 +1,6 @@
 {
   "name": "color-scale-generator",
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.9.2",
   "description": "This is a program to generate a scale of colors based on the input colors and the number of colors in the scale.",
   "version": "0.0.0-SNAPSHOT",
   "author": {
@@ -44,8 +44,8 @@
     "@types/node": "22.15.29",
     "@types/react": "19.1.6",
     "@types/react-dom": "19.1.5",
-    "@typescript-eslint/eslint-plugin": "8.33.0",
-    "@typescript-eslint/parser": "8.33.0",
+    "@typescript-eslint/eslint-plugin": "8.33.1",
+    "@typescript-eslint/parser": "8.33.1",
     "eslint": "9.28.0",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "10.1.5",
