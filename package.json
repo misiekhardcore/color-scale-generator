@@ -1,6 +1,6 @@
 {
   "name": "color-scale-generator",
-  "packageManager": "yarn@4.10.2",
+  "packageManager": "yarn@4.10.3",
   "description": "This is a program to generate a scale of colors based on the input colors and the number of colors in the scale.",
   "version": "0.0.0-SNAPSHOT",
   "author": {
