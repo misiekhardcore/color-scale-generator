@@ -11,6 +11,7 @@ import {
   ExportModal,
   Input,
   Selector,
+  StepInputs,
 } from '@/app/components';
 
 import { ColorSpace, ColorTypeMap } from './types';
@@ -108,168 +109,6 @@ export default function Home() {
     setInputColorEnd(convertedColor);
   }
 
-  function getStepInputs() {
-    // For HEX and RAL, step should be in RGB format
-    if (resultsColorSpace === 'HEX' || resultsColorSpace === 'RAL') {
-      return (
-        <>
-          <Input
-            label="Step R"
-            type="number"
-            value={((step as { r?: number }).r || 0).toString()}
-            onChange={(value) => setStep({ ...step, r: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step G"
-            type="number"
-            value={((step as { g?: number }).g || 0).toString()}
-            onChange={(value) => setStep({ ...step, g: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step B"
-            type="number"
-            value={((step as { b?: number }).b || 0).toString()}
-            onChange={(value) => setStep({ ...step, b: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    // For other color spaces, use their specific channels
-    if (resultsColorSpace === 'RGB') {
-      return (
-        <>
-          <Input
-            label="Step R"
-            type="number"
-            value={((step as { r?: number }).r || 0).toString()}
-            onChange={(value) => setStep({ ...step, r: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step G"
-            type="number"
-            value={((step as { g?: number }).g || 0).toString()}
-            onChange={(value) => setStep({ ...step, g: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step B"
-            type="number"
-            value={((step as { b?: number }).b || 0).toString()}
-            onChange={(value) => setStep({ ...step, b: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    if (resultsColorSpace === 'CMYK') {
-      return (
-        <>
-          <Input
-            label="Step C"
-            type="number"
-            value={((step as { c?: number }).c || 0).toString()}
-            onChange={(value) => setStep({ ...step, c: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step M"
-            type="number"
-            value={((step as { m?: number }).m || 0).toString()}
-            onChange={(value) => setStep({ ...step, m: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step Y"
-            type="number"
-            value={((step as { y?: number }).y || 0).toString()}
-            onChange={(value) => setStep({ ...step, y: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step K"
-            type="number"
-            value={((step as { k?: number }).k || 0).toString()}
-            onChange={(value) => setStep({ ...step, k: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    if (resultsColorSpace === 'HSL') {
-      return (
-        <>
-          <Input
-            label="Step H"
-            type="number"
-            value={((step as { h?: number }).h || 0).toString()}
-            onChange={(value) => setStep({ ...step, h: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step S"
-            type="number"
-            value={((step as { s?: number }).s || 0).toString()}
-            onChange={(value) => setStep({ ...step, s: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step L"
-            type="number"
-            value={((step as { l?: number }).l || 0).toString()}
-            onChange={(value) => setStep({ ...step, l: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    if (resultsColorSpace === 'HSV') {
-      return (
-        <>
-          <Input
-            label="Step H"
-            type="number"
-            value={((step as { h?: number }).h || 0).toString()}
-            onChange={(value) => setStep({ ...step, h: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step S"
-            type="number"
-            value={((step as { s?: number }).s || 0).toString()}
-            onChange={(value) => setStep({ ...step, s: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step V"
-            type="number"
-            value={((step as { v?: number }).v || 0).toString()}
-            onChange={(value) => setStep({ ...step, v: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    if (resultsColorSpace === 'HWB') {
-      return (
-        <>
-          <Input
-            label="Step H"
-            type="number"
-            value={((step as { h?: number }).h || 0).toString()}
-            onChange={(value) => setStep({ ...step, h: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step W"
-            type="number"
-            value={((step as { w?: number }).w || 0).toString()}
-            onChange={(value) => setStep({ ...step, w: parseFloat(value) || 0 })}
-          />
-          <Input
-            label="Step B"
-            type="number"
-            value={((step as { b?: number }).b || 0).toString()}
-            onChange={(value) => setStep({ ...step, b: parseFloat(value) || 0 })}
-          />
-        </>
-      );
-    }
-
-    return null;
-  }
-
   return (
     <main className="flex flex-col gap-2 p-2 max-w-(--breakpoint-xl)">
       <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 justify-center">
@@ -353,7 +192,7 @@ export default function Home() {
               <div className="col-span-4 font-semibold">
                 Step values (in {resultsColorSpace} space):
               </div>
-              {getStepInputs()}
+              <StepInputs colorSpace={resultsColorSpace} step={step} onStepChange={setStep} />
             </div>
           )}
         </div>
