@@ -45,8 +45,6 @@ describe('Exporter', () => {
 
   it('should throw error if exporter not found', () => {
     // @ts-expect-error unknown exporter
-    expect(() => Exporter.getExporter('exportUnknown')).toThrowError(
-      'No exporter exportUnknown found'
-    );
+    expect(() => Exporter.getExporter('exportUnknown')).toThrow('No exporter exportUnknown found');
   });
 });
