@@ -3,13 +3,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'RAL';
+const RAL_KEY = 'RAL';
 type KEY = 'RAL';
 
 export function RalInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange(newValue: string) {
     const newRal = { ral: +newValue };
-    if (!Validator.validate(KEY, newRal)) return;
+    if (!Validator.validate(RAL_KEY, newRal)) return;
     onChange(newRal);
   }
   return (

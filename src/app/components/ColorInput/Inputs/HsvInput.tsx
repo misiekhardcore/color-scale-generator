@@ -4,13 +4,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'HSV';
+const HSV_KEY = 'HSV';
 type KEY = 'HSV';
 
 export function HsvInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
     const newHsv = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newHsv)) return;
+    if (!Validator.validate(HSV_KEY, newHsv)) return;
     onChange(newHsv);
   }
 

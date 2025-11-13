@@ -4,13 +4,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'HSL';
+const HSL_KEY = 'HSL';
 type KEY = 'HSL';
 
 export function HslInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
     const newHsl = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newHsl)) return;
+    if (!Validator.validate(HSL_KEY, newHsl)) return;
     onChange(newHsl);
   }
 

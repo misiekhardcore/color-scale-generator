@@ -1,5 +1,3 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 import testingLibrary from 'eslint-plugin-testing-library';
@@ -8,10 +6,10 @@ import tseslint from '@typescript-eslint/eslint-plugin';
 import nextPlugin from '@next/eslint-plugin-next';
 import globals from 'globals';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 export default [
+  {
+    ignores: ['node_modules', 'dist', 'build', 'coverage', '.next'],
+  },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -21,6 +19,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.jest,
       },
     },
 
@@ -34,8 +33,6 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs['core-web-vitals'].rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -45,32 +42,6 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
-      // Disable no-undef for TypeScript files - TypeScript handles this
-      'no-undef': 'off',
-      // Disable no-redeclare for TypeScript files - allow const/type with same name
-      'no-redeclare': 'off',
-      '@typescript-eslint/no-redeclare': 'off',
     },
-  },
-  {
-    files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}', '**/*.tset.{ts,tsx}'],
-    languageOptions: {
-      globals: {
-        ...globals.jest,
-      },
-    },
-  },
-  {
-    ignores: [
-      '**/jest.config.js',
-      '**/jest.setup.js',
-      '**/lint-staged.config.js',
-      '**/next.config.js',
-      '**/prettier.config.js',
-      '.next',
-      '.yarn',
-      '.swc',
-      'node_modules',
-    ],
   },
 ];

@@ -4,13 +4,13 @@ import { Input } from '@/app/components';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'CMYK';
+const CMYK_KEY = 'CMYK';
 type KEY = 'CMYK';
 
 export function CmykInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
     const newCmyk = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newCmyk)) return;
+    if (!Validator.validate(CMYK_KEY, newCmyk)) return;
     onChange(newCmyk);
   }
 
