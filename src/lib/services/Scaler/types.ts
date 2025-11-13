@@ -9,3 +9,15 @@ export type Scalers = {
     colorsNumber: number
   ) => ColorTypeMap[Key][];
 };
+
+// Step-based scaler types
+export type StepScalerKey<P extends string> =
+  `getScaleFromStep${Capitalize<Lowercase<string & P>>}`;
+
+export type StepScalers = {
+  [Key in keyof ColorTypeMap as StepScalerKey<string & Key>]: (
+    startColor: ColorTypeMap[Key],
+    step: Partial<Record<keyof ColorTypeMap[Key], number>>,
+    colorsNumber: number
+  ) => ColorTypeMap[Key][];
+};
