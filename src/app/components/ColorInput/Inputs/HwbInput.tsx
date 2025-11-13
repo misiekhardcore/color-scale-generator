@@ -4,13 +4,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'HWB';
+const HWB_KEY = 'HWB';
 type KEY = 'HWB';
 
 export function HwbInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
     const newHwb = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newHwb)) return;
+    if (!Validator.validate(HWB_KEY, newHwb)) return;
     onChange(newHwb);
   }
 

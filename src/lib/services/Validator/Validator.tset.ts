@@ -7,7 +7,7 @@ describe('Validator', () => {
   });
 
   it('should throw an error if validator not found', () => {
-    expect(() => Validator.getValidator('HEX')).toThrowError('No validator validateHex found');
+    expect(() => Validator.getValidator('HEX')).toThrow('No validator validateHex found');
   });
 
   it('should validate a RGB color', () => {
@@ -110,6 +110,6 @@ describe('Validator', () => {
 
   it('should throw an error if color is invalid', () => {
     const color = { r: 0, g: 0, b: 256 };
-    expect(() => Validator.validate('RGB', color)).toThrowError('Invalid color');
+    expect(() => Validator.validate('RGB', color)).toThrow('Invalid color');
   });
 });

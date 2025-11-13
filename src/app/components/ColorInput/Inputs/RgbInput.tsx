@@ -4,13 +4,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'RGB';
+const RGB_KEY = 'RGB';
 type KEY = 'RGB';
 
 export function RgbInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(key: T, newValue: string) {
     const newRgb = { ...value, [key]: +newValue };
-    if (!Validator.validate(KEY, newRgb)) return;
+    if (!Validator.validate(RGB_KEY, newRgb)) return;
     onChange(newRgb);
   }
 

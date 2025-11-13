@@ -1,9 +1,9 @@
-import { MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 
 export class SteadyClickController {
   readonly DRAG_DELAY = 100;
   readonly DRAG_THRESHOLD = 5;
-  timer: NodeJS.Timeout | null = null;
+  timer: ReturnType<typeof setTimeout> | null = null;
   dragging: boolean = false;
   initialMousePosition: { x: number; y: number } = { x: 0, y: 0 };
 

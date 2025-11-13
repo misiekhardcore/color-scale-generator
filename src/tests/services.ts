@@ -23,24 +23,40 @@ type FakeMouseEventInit = {
 };
 
 class FakeMouseEvent extends MouseEvent {
-  offsetX: number = 0;
-  offsetY: number = 0;
-  pageX: number = 0;
-  pageY: number = 0;
-  x: number = 0;
-  y: number = 0;
-
   constructor(type: string, values: Partial<FakeMouseEventInit>) {
     const { pageX, pageY, offsetX, offsetY, x, y, ...mouseValues } = values;
     super(type, mouseValues);
 
-    Object.assign(this, {
-      offsetX: offsetX || 0,
-      offsetY: offsetY || 0,
-      pageX: pageX || 0,
-      pageY: pageY || 0,
-      x: x || 0,
-      y: y || 0,
+    // Use Object.defineProperty to set read-only properties that JSDOM doesn't allow setting directly
+    Object.defineProperty(this, 'offsetX', {
+      value: offsetX || 0,
+      writable: false,
+      configurable: true,
+    });
+    Object.defineProperty(this, 'offsetY', {
+      value: offsetY || 0,
+      writable: false,
+      configurable: true,
+    });
+    Object.defineProperty(this, 'pageX', {
+      value: pageX || 0,
+      writable: false,
+      configurable: true,
+    });
+    Object.defineProperty(this, 'pageY', {
+      value: pageY || 0,
+      writable: false,
+      configurable: true,
+    });
+    Object.defineProperty(this, 'x', {
+      value: x || 0,
+      writable: false,
+      configurable: true,
+    });
+    Object.defineProperty(this, 'y', {
+      value: y || 0,
+      writable: false,
+      configurable: true,
     });
   }
 }
