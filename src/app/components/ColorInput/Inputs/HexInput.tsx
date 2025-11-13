@@ -4,13 +4,13 @@ import { Validator } from '@/lib/services';
 
 import { InputComponentProps } from './types';
 
-const KEY = 'HEX';
+const HEX_KEY = 'HEX';
 type KEY = 'HEX';
 
 export function HexInput({ value, onChange }: InputComponentProps<KEY>) {
   function handleChange<T extends keyof ColorTypeMap[KEY]>(newValue: ColorTypeMap[KEY][T]) {
     const newHex = { hex: newValue };
-    if (!Validator.validate(KEY, newHex)) return;
+    if (!Validator.validate(HEX_KEY, newHex)) return;
     onChange(newHex);
   }
   return (
