@@ -45,10 +45,15 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      // Disable no-undef for TypeScript files - TypeScript handles this
+      'no-undef': 'off',
+      // Disable no-redeclare for TypeScript files - allow const/type with same name
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'off',
     },
   },
   {
-    files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}'],
+    files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}', '**/*.tset.{ts,tsx}'],
     languageOptions: {
       globals: {
         ...globals.jest,
