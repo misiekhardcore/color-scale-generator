@@ -7,3 +7,5 @@ export { ClickableColorOutput } from './ClickableColorOutput';
 export { Modal, useModal } from './Modal';
 export { ExportModal } from './ExportModal';
 export { StepInputs } from './StepInputs';
+export { ScaleResults } from './ScaleResults';
+export { ColorScaleForm } from './ColorScaleForm';
