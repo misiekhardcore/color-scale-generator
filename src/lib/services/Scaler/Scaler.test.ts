@@ -8,7 +8,7 @@ describe('Scaler', () => {
 
   it('should throw an error if scaler not found', () => {
     // @ts-expect-error Testing invalid input
-    expect(() => Scaler.getScaler('UNKNOWN')).toThrowError('No scaler getScaleUnknown found');
+    expect(() => Scaler.getScaler('UNKNOWN')).toThrow('No scaler getScaleUnknown found');
   });
 
   it('should get CMYK scale', () => {
@@ -123,13 +123,13 @@ describe('Scaler', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input
       Scaler.getScale('UNKNOWN', 'UNKNOWN', { r: 0, g: 0, b: 0 }, { r: 255, g: 255, b: 255 }, 3)
-    ).toThrowError('No scaler getScaleUnknown found');
+    ).toThrow('No scaler getScaleUnknown found');
   });
 
   it('should throw an error if converter not found', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input
       Scaler.getScale('UNKNOWN', 'RGB', { r: 0, g: 0, b: 0 }, { r: 255, g: 255, b: 255 }, 3)
-    ).toThrowError('No converter from UNKNOWN to RGB');
+    ).toThrow('No converter from UNKNOWN to RGB');
   });
 });
