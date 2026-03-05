@@ -58,7 +58,7 @@
     "jiti": "2.6.1",
     "lint-staged": "16.3.1",
     "pinst": "3.0.0",
-    "postcss": "8.5.6",
+    "postcss": "8.5.8",
     "prettier": "3.6.2",
     "sass": "1.97.3",
     "tailwindcss": "4.2.1",
