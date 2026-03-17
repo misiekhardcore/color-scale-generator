@@ -1,4 +1,12 @@
-import { Button, ColorInput, ColorOutput, Input, Selector, StepInputs } from '@/app/components';
+import {
+  Button,
+  ColorControlRow,
+  ColorInput,
+  ColorOutput,
+  Input,
+  Selector,
+  StepInputs,
+} from '@/app/components';
 import type { ColorSpace, ColorTypeMap } from '@/app/types';
 import { COLOR_SPACES } from '@/app/constants';
 
@@ -51,10 +59,13 @@ export function ColorScaleForm({
   onStepChange,
   onExportClick,
 }: ColorScaleFormProps) {
+  const isTwoColor = scaleMode === 'two-color';
+
   return (
     <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 justify-center">
       <div className="grid grid-cols-3 gap-2 items-start">
-        <Button onClick={onExportClick} className="self-end">
+        {/* Row 1: export action + scale mode */}
+        <Button onClick={onExportClick} className="col-start-1 self-end">
           Export scale
         </Button>
         <Selector
@@ -63,14 +74,18 @@ export function ColorScaleForm({
           selected={scaleMode}
           onChange={(value) => onScaleModeChange(value)}
         />
-        <div></div>
+
+        {/* Row 2: hex color pickers.
+            col-start-1 forces this item to column 1, starting a new row.
+            No selector in col 1 here — the picker itself occupies col 1. */}
         <Input
           label="Color"
           type="color"
           value={hexInputColorStart.hex}
           onChange={onHexInputColorStartChange}
+          className="col-start-1"
         />
-        {scaleMode === 'two-color' && (
+        {isTwoColor && (
           <Input
             label="Color"
             type="color"
@@ -78,47 +93,66 @@ export function ColorScaleForm({
             onChange={onHexInputColorEndChange}
           />
         )}
-        {scaleMode === 'step' && <div></div>}
-        <Selector
-          label="Input color space"
-          items={COLOR_SPACES}
-          selected={inputColorSpace}
-          onChange={onInputColorSpaceChange}
+
+        {/* Row 3: input color space selector + per-color channel inputs */}
+        <ColorControlRow
+          selector={
+            <Selector
+              label="Input color space"
+              items={COLOR_SPACES}
+              selected={inputColorSpace}
+              onChange={onInputColorSpaceChange}
+            />
+          }
+          startControl={
+            <ColorInput
+              type={inputColorSpace}
+              value={inputColorStart}
+              onChange={(newValue) => onInputColorStartChange(newValue)}
+            />
+          }
+          endControl={
+            isTwoColor ? (
+              <ColorInput
+                type={inputColorSpace}
+                value={inputColorEnd}
+                onChange={(newValue) => onInputColorEndChange(newValue)}
+              />
+            ) : undefined
+          }
         />
-        <ColorInput
-          type={inputColorSpace}
-          value={inputColorStart}
-          onChange={(newValue) => onInputColorStartChange(newValue)}
+
+        {/* Row 4: output color space selector + per-color output displays */}
+        <ColorControlRow
+          selector={
+            <Selector
+              label="Output color space"
+              items={COLOR_SPACES}
+              selected={outputColorSpace}
+              onChange={onOutputColorSpaceChange}
+            />
+          }
+          startControl={
+            <ColorOutput
+              value={inputColorStart}
+              from={inputColorSpace}
+              to={outputColorSpace}
+              className="self-end"
+            />
+          }
+          endControl={
+            isTwoColor ? (
+              <ColorOutput
+                value={inputColorEnd}
+                from={inputColorSpace}
+                to={outputColorSpace}
+                className="self-end"
+              />
+            ) : undefined
+          }
         />
-        {scaleMode === 'two-color' && (
-          <ColorInput
-            type={inputColorSpace}
-            value={inputColorEnd}
-            onChange={(newValue) => onInputColorEndChange(newValue)}
-          />
-        )}
-        {scaleMode === 'step' && <div></div>}
-        <Selector
-          label="Output color space"
-          items={COLOR_SPACES}
-          selected={outputColorSpace}
-          onChange={onOutputColorSpaceChange}
-        />
-        <ColorOutput
-          value={inputColorStart}
-          from={inputColorSpace}
-          to={outputColorSpace}
-          className="self-end"
-        />
-        {scaleMode === 'two-color' && (
-          <ColorOutput
-            value={inputColorEnd}
-            from={inputColorSpace}
-            to={outputColorSpace}
-            className="self-end"
-          />
-        )}
-        {scaleMode === 'step' && <div></div>}
+
+        {/* Row 5: number of colors in the scale */}
         <Input
           className="col-span-3"
           value={colorsNumber.toString()}
@@ -128,6 +162,8 @@ export function ColorScaleForm({
           max={MAX_RESULTS_COUNT}
           type="number"
         />
+
+        {/* Row 6 (step mode only): step value inputs */}
         {scaleMode === 'step' && (
           <div className="col-span-3 grid grid-cols-4 gap-2">
             <div className="col-span-4 font-semibold">

@@ -9,3 +9,4 @@ export { ExportModal } from './ExportModal';
 export { StepInputs } from './StepInputs';
 export { ScaleResults } from './ScaleResults';
 export { ColorScaleForm } from './ColorScaleForm';
+export { ColorControlRow } from './ColorControlRow';
