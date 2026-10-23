@@ -63,6 +63,7 @@ yarn install
 ## Reporting issues
 
 Use the [GitHub issue tracker](https://github.com/misiekhardcore/color-scale-generator/issues). Include:
+
 - a clear title and description
 - steps to reproduce
 - the expected and actual behavior
