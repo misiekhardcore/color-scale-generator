@@ -11,6 +11,8 @@ Generate color scales based on two input colors (or a start color and a step val
 - **Multiple color spaces** - `RGB`, `CMYK`, `HSL`, `HSV`, `HEX`, `HWB`, and `RAL`
 - **Flexible inputs** - enter colors directly in the active color space (e.g. a RAL number) or paste a hex value
 - **Export** - copy the generated scale as CSS or Sass variables in hex, rgb, hsl, or hwb
+- **Light and dark themes** - follows the system preference by default, with a toggle in the header
+- **Live results** - the scale updates as you type, with a gradient preview and swatches that can be switched between color spaces
 - **Typed API** - the underlying scaler, converter, validator, and exporter services are covered by unit tests and can be reused directly from `lib/`
 
 ## Tech stack
@@ -19,6 +21,8 @@ Generate color scales based on two input colors (or a start color and a step val
 - [React 19](https://react.dev)
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS 4](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com) components (Radix UI primitives, `cn`, `class-variance-authority`)
+- [next-themes](https://github.com/pacocoursey/next-themes) for light/dark/system theming
 - [Jest](https://jestjs.io) for unit testing
 - [ESLint](https://eslint.org) + [Prettier](https://prettier.io) for linting
 
@@ -38,12 +42,11 @@ Open [http://localhost:3000](http://localhost:3000) to use the app.
 ## Usage
 
 1. Pick a **scale mode**:
-   - `Two-color` - interpolate between a start and end color.
-   - `Step` - advance from the start color by a fixed step value.
-2. Set the **input color space** and provide the start (and end) color. You may also paste a hex value into the hex inputs.
-3. Choose the **results color space** to control how the generated scale is displayed and exported.
-4. Set the **number of colors** in the scale.
-5. Click **Export** to open the modal and copy the scale as CSS or Sass variables.
+   - `Between two colors` - interpolate between a start and end color.
+   - `Fixed step` - advance from the start color by a fixed step value.
+2. In **Input colors**, choose the space you want to enter colors in (`Enter colors as`) and the space the value read-out uses (`Show values as`), then set the start (and end) color using the color picker, the channel inputs, or a hex value.
+3. In **Scale settings**, set how many colors to generate and choose the space used for interpolation (`Interpolate in`). In step mode the per-channel step values appear here too.
+4. Click **Export** in the results header to copy the scale as CSS or Sass variables. Click any swatch to show its values in the next color space, or use the theme toggle in the header to switch between light and dark.
 
 ### Color spaces
 
@@ -75,10 +78,14 @@ Open [http://localhost:3000](http://localhost:3000) to use the app.
 ```
 src/
   app/        # Next.js App Router: page, layout, hooks, components
+    components/
+      ui/     # shadcn/ui primitives (generated, restyled to repo conventions)
   lib/
     services/ # Scaler, Converter, Validator, Stringifier, Exporter
     helpers/  # small utilities
-tests/        # shared test helpers
+    utils.ts  # `cn` class name helper
+  tests/      # shared test helpers
+components.json # shadcn/ui CLI configuration
 ```
 
 The public services are re-exported from `lib/services` and can be used standalone:

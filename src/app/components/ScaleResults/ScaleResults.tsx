@@ -1,27 +1,45 @@
-import { ClickableColorOutput, Selector } from '@/app/components';
-import type { ColorSpace, Color } from '@/app/types';
-import { COLOR_SPACES } from '@/app/constants';
+'use client';
+
+import { DownloadIcon } from 'lucide-react';
+
+import { ClickableColorOutput } from '@/app/components/ClickableColorOutput';
+import { Section } from '@/app/components/Section';
+import { Button } from '@/app/components/ui/button';
+import type { Color, ColorSpace } from '@/app/types';
+import { Converter } from '@/lib/services';
 
 interface ScaleResultsProps {
   scale: Color[];
   colorSpace: ColorSpace;
-  onColorSpaceChange: (newColorSpace: ColorSpace) => void;
+  onExportClick: () => void;
 }
 
-export function ScaleResults({ scale, colorSpace, onColorSpaceChange }: ScaleResultsProps) {
+export function ScaleResults({ scale, colorSpace, onExportClick }: ScaleResultsProps) {
+  const gradient = scale.map((color) => Converter.convert(colorSpace, 'HEX', color).hex).join(', ');
+
   return (
-    <div className="flex gap-2 flex-wrap w-full items-center">
-      <Selector
-        label="Color scale calculation space"
-        items={COLOR_SPACES}
-        selected={colorSpace}
-        onChange={onColorSpaceChange}
+    <Section
+      title="Results"
+      description={`${scale.length} ${scale.length === 1 ? 'color' : 'colors'} interpolated in ${colorSpace}. Click a swatch to show its values in another color space.`}
+      action={
+        <Button onClick={onExportClick}>
+          <DownloadIcon data-icon="inline-start" />
+          Export
+        </Button>
+      }
+      contentClassName="gap-3"
+    >
+      <div
+        role="img"
+        aria-label={`Preview of the generated ${scale.length} color scale`}
+        className="h-10 w-full rounded-lg border"
+        style={{ backgroundImage: `linear-gradient(to right, ${gradient})` }}
       />
-      <div className="flex gap-2 flex-wrap w-full items-center">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))] gap-3">
         {scale.map((color, index) => (
           <ClickableColorOutput key={index} value={color} type={colorSpace} />
         ))}
       </div>
-    </div>
+    </Section>
   );
 }

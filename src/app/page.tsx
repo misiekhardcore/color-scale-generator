@@ -2,24 +2,22 @@
 
 import { useState } from 'react';
 
-import { Scaler } from '@/lib/services';
-import { ColorScaleForm, ExportModal, ScaleResults } from '@/app/components';
+import { ColorScaleForm } from '@/app/components/ColorScaleForm';
+import { ExportModal } from '@/app/components/ExportModal';
+import { ScaleResults } from '@/app/components/ScaleResults';
 import { useColorInputs, useStepValues } from '@/app/hooks';
+import { Scaler } from '@/lib/services';
 
-import { ColorSpace } from './types';
+import type { ColorSpace, ScaleMode } from './types';
 
 const INITIAL_RESULTS_COUNT = 10;
-const INITIAL_OUTPUT_COLOR_SPACE: ColorSpace = 'RAL';
-
-type ScaleMode = 'two-color' | 'step';
+const INITIAL_COLOR_SPACE: ColorSpace = 'RAL';
 
 export default function Home() {
   const [scaleMode, setScaleMode] = useState<ScaleMode>('two-color');
   const [colorsNumber, setColorsNumber] = useState(INITIAL_RESULTS_COUNT);
-  const [outputColorSpace, setOutputColorSpace] = useState<ColorSpace>(INITIAL_OUTPUT_COLOR_SPACE);
-  const [resultsColorSpace, setResultsColorSpace] = useState<ColorSpace>(
-    INITIAL_OUTPUT_COLOR_SPACE
-  );
+  const [previewColorSpace, setPreviewColorSpace] = useState<ColorSpace>(INITIAL_COLOR_SPACE);
+  const [resultsColorSpace, setResultsColorSpace] = useState<ColorSpace>(INITIAL_COLOR_SPACE);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   const {
@@ -54,44 +52,42 @@ export default function Home() {
           colorsNumber
         );
 
-  function changeOutputColorSpace(newColorSpace: ColorSpace) {
-    setOutputColorSpace(newColorSpace);
-  }
-
   function changeResultsColorSpace(newColorSpace: ColorSpace) {
     setResultsColorSpace(newColorSpace);
     resetStepForColorSpace(newColorSpace);
   }
 
   return (
-    <main className="flex flex-col gap-2 p-2 max-w-(--breakpoint-xl)">
-      <ColorScaleForm
-        scaleMode={scaleMode}
-        onScaleModeChange={setScaleMode}
-        colorsNumber={colorsNumber}
-        onColorsNumberChange={setColorsNumber}
-        inputColorSpace={inputColorSpace}
-        onInputColorSpaceChange={changeInputColorSpace}
-        outputColorSpace={outputColorSpace}
-        onOutputColorSpaceChange={changeOutputColorSpace}
-        resultsColorSpace={resultsColorSpace}
-        inputColorStart={inputColorStart}
-        onInputColorStartChange={setInputColorStart}
-        inputColorEnd={inputColorEnd}
-        onInputColorEndChange={setInputColorEnd}
-        hexInputColorStart={hexInputColorStart}
-        hexInputColorEnd={hexInputColorEnd}
-        onHexInputColorStartChange={handleColorInputStartChange}
-        onHexInputColorEndChange={handleColorInputEndChange}
-        step={step}
-        onStepChange={setStep}
-        onExportClick={() => setIsExportModalOpen(true)}
-      />
-      <ScaleResults
-        scale={scale}
-        colorSpace={resultsColorSpace}
-        onColorSpaceChange={changeResultsColorSpace}
-      />
+    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:py-8">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-start">
+        <ColorScaleForm
+          scaleMode={scaleMode}
+          onScaleModeChange={setScaleMode}
+          colorsNumber={colorsNumber}
+          onColorsNumberChange={setColorsNumber}
+          inputColorSpace={inputColorSpace}
+          onInputColorSpaceChange={changeInputColorSpace}
+          previewColorSpace={previewColorSpace}
+          onPreviewColorSpaceChange={setPreviewColorSpace}
+          resultsColorSpace={resultsColorSpace}
+          onResultsColorSpaceChange={changeResultsColorSpace}
+          inputColorStart={inputColorStart}
+          onInputColorStartChange={setInputColorStart}
+          inputColorEnd={inputColorEnd}
+          onInputColorEndChange={setInputColorEnd}
+          hexInputColorStart={hexInputColorStart}
+          hexInputColorEnd={hexInputColorEnd}
+          onHexInputColorStartChange={handleColorInputStartChange}
+          onHexInputColorEndChange={handleColorInputEndChange}
+          step={step}
+          onStepChange={setStep}
+        />
+        <ScaleResults
+          scale={scale}
+          colorSpace={resultsColorSpace}
+          onExportClick={() => setIsExportModalOpen(true)}
+        />
+      </div>
       <ExportModal
         open={isExportModalOpen}
         onClose={() => setIsExportModalOpen(false)}

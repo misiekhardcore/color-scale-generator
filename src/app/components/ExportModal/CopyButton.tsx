@@ -1,23 +1,32 @@
 'use client';
 
+import { CheckIcon, CopyIcon } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
-import { Button } from '@/app/components';
+import { Button } from '@/app/components/ui/button';
 
 export function CopyButton({ text }: { text: string }) {
-  const [isCopying, setIsCopying] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function copy() {
-    setIsCopying(true);
-    navigator.clipboard.writeText(text);
-    const timeout = setTimeout(() => {
-      setIsCopying(false);
-      clearTimeout(timeout);
-    }, 1000);
+    setCopied(true);
+    const resetTimer = setTimeout(() => setCopied(false), 1500);
+
+    navigator.clipboard
+      .writeText(text)
+      .then(() => toast.success('Copied to clipboard'))
+      .catch(() => {
+        clearTimeout(resetTimer);
+        setCopied(false);
+        toast.error('Could not copy to clipboard');
+      });
   }
+
   return (
-    <Button onClick={copy} disabled={isCopying} className="self-end">
-      {isCopying ? 'Copied!' : 'Copy'}
+    <Button type="button" onClick={copy} disabled={copied}>
+      {copied ? <CheckIcon data-icon="inline-start" /> : <CopyIcon data-icon="inline-start" />}
+      {copied ? 'Copied!' : 'Copy'}
     </Button>
   );
 }

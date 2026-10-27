@@ -1,38 +1,47 @@
-import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import classNames from 'classnames';
+'use client';
+
+import { ChangeEvent, ComponentProps, useId } from 'react';
+
+import { Input as InputPrimitive } from '@/app/components/ui/input';
+import { Label } from '@/app/components/ui/label';
+import { cn } from '@/lib/utils';
 
 type Value = string | number | undefined;
 
-interface InputProps<T extends Value>
-  extends Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    'onChange' | 'capture'
-  > {
-  value?: T;
+interface InputProps extends Omit<ComponentProps<'input'>, 'onChange' | 'value' | 'className'> {
+  value?: Value;
   onChange: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
   label: string;
+  /** Visually hides the label while keeping it available to assistive technology */
+  hideLabel?: boolean;
+  className?: string;
 }
 
-export function Input<T extends Value>({
+export function Input({
   value,
   onChange,
   label,
+  hideLabel,
   className,
+  id,
   type,
   ...rest
-}: InputProps<T>) {
-  const inputClasses = classNames('w-full', type === 'color' && 'h-10 p-0 m-0');
+}: InputProps) {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
 
   return (
-    <label className={classNames('flex flex-col gap-1', className)}>
-      {label}
-      <input
+    <div className={cn('flex min-w-0 flex-col gap-1.5', className)}>
+      <Label htmlFor={inputId} className={cn(hideLabel && 'sr-only')}>
+        {label}
+      </Label>
+      <InputPrimitive
         {...rest}
+        id={inputId}
         type={type}
-        className={inputClasses}
         value={value}
-        onChange={(e) => onChange(e.target.value, e)}
+        onChange={(event) => onChange(event.target.value, event)}
       />
-    </label>
+    </div>
   );
 }

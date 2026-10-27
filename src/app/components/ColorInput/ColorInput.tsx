@@ -12,7 +12,7 @@ interface ColorInputProps<T extends keyof ColorTypeMap = keyof ColorTypeMap>
 export function ColorInput({ value, onChange, type }: ColorInputProps) {
   const InputComponent = getInputComponent(type);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(4.5rem,1fr))] gap-2">
       <InputComponent value={value} onChange={onChange} />
     </div>
   );

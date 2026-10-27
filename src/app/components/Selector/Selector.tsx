@@ -1,14 +1,29 @@
-import { isNumber } from '@/lib/helpers';
-import classNames from 'classnames';
+'use client';
 
-type Value = string | number | undefined;
+import { useId } from 'react';
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/app/components/ui/select';
+import { Label } from '@/app/components/ui/label';
+import { isNumber } from '@/lib/helpers';
+import { cn } from '@/lib/utils';
+
+type Value = string | number;
 
 interface SelectorProps<T extends Value> {
   label: string;
   items: readonly T[];
   selected: T;
   onChange: (value: T) => void;
+  /** Visually hides the label while keeping it available to assistive technology */
+  hideLabel?: boolean;
   className?: string;
+  triggerClassName?: string;
 }
 
 export function Selector<T extends Value>({
@@ -16,22 +31,32 @@ export function Selector<T extends Value>({
   selected,
   onChange,
   label,
+  hideLabel,
   className,
+  triggerClassName,
 }: SelectorProps<T>) {
+  const controlId = useId();
+
   return (
-    <label className={classNames('flex flex-col gap-1', className)}>
-      {label}
-      <select
-        className="w-full"
-        value={selected}
-        onChange={({ target: { value } }) => onChange((isNumber(value) ? +value : value) as T)}
+    <div className={cn('flex min-w-0 flex-col gap-1.5', className)}>
+      <Label htmlFor={controlId} className={cn(hideLabel && 'sr-only')}>
+        {label}
+      </Label>
+      <Select
+        value={String(selected)}
+        onValueChange={(value) => onChange((isNumber(value) ? +value : value) as T)}
       >
-        {items.map((item) => (
-          <option key={`${item}`} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    </label>
+        <SelectTrigger id={controlId} className={cn('w-full', triggerClassName)}>
+          <SelectValue>{String(selected)}</SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          {items.map((item) => (
+            <SelectItem key={`${item}`} value={`${item}`}>
+              {item}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

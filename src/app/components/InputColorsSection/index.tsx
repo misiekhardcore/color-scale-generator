@@ -1,0 +1,1 @@
+export { InputColorsSection } from './InputColorsSection';

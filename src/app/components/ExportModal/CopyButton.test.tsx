@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 
 import { CopyButton } from './CopyButton';
 
-const writeText = jest.fn();
+const writeText = jest.fn().mockResolvedValue(undefined);
 
 Object.assign(navigator, {
   clipboard: {
