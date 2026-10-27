@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import type { ReactElement } from 'react';
 
 import { TooltipProvider } from '@/app/components/ui/tooltip';
@@ -17,27 +17,24 @@ function renderScaleResults(ui: ReactElement) {
 
 describe('ScaleResults', () => {
   it('should render one swatch per color in the scale', () => {
-    renderScaleResults(<ScaleResults scale={scale} colorSpace="RGB" onExportClick={jest.fn()} />);
+    renderScaleResults(<ScaleResults scale={scale} colorSpace="RGB" />);
 
     expect(screen.getAllByRole('list')).toHaveLength(3);
   });
 
   it('should render a preview of the whole scale', () => {
-    renderScaleResults(<ScaleResults scale={scale} colorSpace="RGB" onExportClick={jest.fn()} />);
+    renderScaleResults(<ScaleResults scale={scale} colorSpace="RGB" />);
 
     expect(
       screen.getByRole('img', { name: 'Preview of the generated 3 color scale' })
     ).toBeInTheDocument();
   });
 
-  it('should call onExportClick when the export action is used', () => {
-    const onExportClick = jest.fn();
-    renderScaleResults(
-      <ScaleResults scale={scale} colorSpace="RGB" onExportClick={onExportClick} />
-    );
+  it('should open the export dialog from the results header', () => {
+    renderScaleResults(<ScaleResults scale={scale} colorSpace="RGB" />);
 
-    screen.getByRole('button', { name: 'Export' }).click();
+    fireEvent.click(screen.getByRole('button', { name: 'Export' }));
 
-    expect(onExportClick).toHaveBeenCalled();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 });

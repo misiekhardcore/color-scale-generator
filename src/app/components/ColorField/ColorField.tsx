@@ -48,6 +48,7 @@ export function ColorField({
         to={previewSpace}
         aria-label={`${label} values`}
         className="text-xs"
+        mutedLabel
       />
     </div>
   );

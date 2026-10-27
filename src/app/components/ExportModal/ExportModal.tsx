@@ -1,15 +1,18 @@
 'use client';
 
+import { DownloadIcon } from 'lucide-react';
 import { useId, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { Label } from '@/app/components/ui/label';
 import {
@@ -25,8 +28,6 @@ import { Exporter, Exporters } from '@/lib/services';
 import { CopyButton } from './CopyButton';
 
 type ExportModalProps<T extends keyof ColorTypeMap> = {
-  open: boolean;
-  onClose: () => void;
   from: T;
   scale: ColorTypeMap[T][];
 };
@@ -69,18 +70,19 @@ const EXPORT_FORMAT_ORDER: (keyof Exporters)[] = [
   'exportRal',
 ];
 
-export function ExportModal<T extends keyof ColorTypeMap>({
-  open,
-  onClose,
-  from,
-  scale,
-}: ExportModalProps<T>) {
+export function ExportModal<T extends keyof ColorTypeMap>({ from, scale }: ExportModalProps<T>) {
   const formatId = useId();
   const [selectedExporter, setSelectedExporter] = useState<keyof Exporters>(DEFAULT_EXPORTER);
   const exportScale = Exporter.export(from, selectedExporter, scale).join('\n');
 
   return (
-    <Dialog open={open} onOpenChange={(nextOpen) => !nextOpen && onClose()}>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <DownloadIcon data-icon="inline-start" />
+          Export
+        </Button>
+      </DialogTrigger>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Export</DialogTitle>
@@ -116,9 +118,11 @@ export function ExportModal<T extends keyof ColorTypeMap>({
 
         <DialogFooter>
           <CopyButton text={exportScale} />
-          <Button type="button" variant="outline" onClick={onClose}>
-            Close
-          </Button>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              Close
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -49,7 +49,7 @@ export function ClickableColorOutput({ value, type }: ClickableColorOutputProps)
       <TooltipTrigger asChild>
         <ColorOutput
           aria-label={`Color values in ${selectedColorSpace}. Activate to show them in ${nextColorSpace}.`}
-          className="min-h-[124px] cursor-pointer transition-shadow focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="min-h-[124px] cursor-pointer focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           value={convertedColor}
           from={selectedColorSpace}
           to={selectedColorSpace}
@@ -81,6 +81,20 @@ function rgbToStyle({ r, g, b }: ColorTypeMap['RGB']) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-function getContrastColor({ r, g, b }: ColorTypeMap['RGB']) {
-  return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? 'black' : 'white';
+// Luminance at which black and white text have the same contrast ratio against
+// a background, so picking a side by this threshold always yields the more
+// readable of the two.
+const EQUAL_CONTRAST_LUMINANCE = 0.179;
+
+function getContrastColor(rgb: ColorTypeMap['RGB']) {
+  return getRelativeLuminance(rgb) > EQUAL_CONTRAST_LUMINANCE ? 'black' : 'white';
+}
+
+function getRelativeLuminance({ r, g, b }: ColorTypeMap['RGB']) {
+  const [red, green, blue] = [r, g, b].map((channel) => {
+    const value = channel / 255;
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  });
+
+  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 }
