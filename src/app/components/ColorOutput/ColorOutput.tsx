@@ -11,9 +11,15 @@ interface ColorOutputProps extends ComponentProps<'ul'> {
   value: ColorTypeMap[keyof ColorTypeMap];
   from: keyof ColorTypeMap;
   to: keyof ColorTypeMap;
+  /**
+   * Renders the channel names in the muted foreground color. Only use this on
+   * neutral backgrounds — on a colored surface the label must inherit the
+   * fallback color picked by the caller to stay legible.
+   */
+  mutedLabel?: boolean;
 }
 
-export function ColorOutput({ value, from, to, className, ...rest }: ColorOutputProps) {
+export function ColorOutput({ value, from, to, mutedLabel, className, ...rest }: ColorOutputProps) {
   const convertedValue = Converter.convert(from, to, value);
 
   return (
@@ -26,7 +32,7 @@ export function ColorOutput({ value, from, to, className, ...rest }: ColorOutput
     >
       {Object.entries(convertedValue).map(([key, value]) => (
         <li key={key} className="pointer-events-none flex items-baseline justify-between gap-2">
-          <span className="text-muted-foreground">{key.toUpperCase()}:</span>
+          <span className={cn(mutedLabel && 'text-muted-foreground')}>{key.toUpperCase()}:</span>
           <span className="font-medium">{formatValue(value)}</span>
         </li>
       ))}

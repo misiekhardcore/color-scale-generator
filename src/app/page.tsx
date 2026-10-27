@@ -3,7 +3,6 @@
 import { useState } from 'react';
 
 import { ColorScaleForm } from '@/app/components/ColorScaleForm';
-import { ExportModal } from '@/app/components/ExportModal';
 import { ScaleResults } from '@/app/components/ScaleResults';
 import { useColorInputs, useStepValues } from '@/app/hooks';
 import { Scaler } from '@/lib/services';
@@ -18,7 +17,6 @@ export default function Home() {
   const [colorsNumber, setColorsNumber] = useState(INITIAL_RESULTS_COUNT);
   const [previewColorSpace, setPreviewColorSpace] = useState<ColorSpace>(INITIAL_COLOR_SPACE);
   const [resultsColorSpace, setResultsColorSpace] = useState<ColorSpace>(INITIAL_COLOR_SPACE);
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   const {
     inputColorSpace,
@@ -82,18 +80,8 @@ export default function Home() {
           step={step}
           onStepChange={setStep}
         />
-        <ScaleResults
-          scale={scale}
-          colorSpace={resultsColorSpace}
-          onExportClick={() => setIsExportModalOpen(true)}
-        />
+        <ScaleResults scale={scale} colorSpace={resultsColorSpace} />
       </div>
-      <ExportModal
-        open={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-        from={resultsColorSpace}
-        scale={scale}
-      />
     </main>
   );
 }

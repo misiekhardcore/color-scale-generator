@@ -32,6 +32,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hand-rolled `Button`, `Modal`, and `ColorControlRow` components, replaced by shadcn primitives.
 
+### Fixed
+
+- Result swatches now pick their text color from the WCAG contrast ratio of black against white and let the channel label inherit it, so values stay legible on light and dark swatches alike.
+- Closing the export dialog returns focus to the Export button, so keyboard users no longer lose their place.
+- The result swatch focus ring is drawn immediately instead of fading in.
+- The selected theme is visible again in the header toggle: the tooltip wrapping each button overwrote the toggle's `data-state`, so the active option had no highlight.
+- The export dialog declares itself as a modal, which the Radix dialog does not set on its own.
+
 ## [1.0.0] - 2025-01-01
 
 - Initial public release.
