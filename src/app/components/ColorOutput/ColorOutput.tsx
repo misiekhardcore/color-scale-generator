@@ -1,14 +1,13 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import classNames from 'classnames';
+import { ComponentProps } from 'react';
 
 import { ColorTypeMap } from '@/app/types';
 import { isNumber } from '@/lib/helpers';
 import { Converter } from '@/lib/services';
+import { cn } from '@/lib/utils';
 
 const MAX_DECIMALS = 3;
 
-interface ColorOutputProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
+interface ColorOutputProps extends ComponentProps<'ul'> {
   value: ColorTypeMap[keyof ColorTypeMap];
   from: keyof ColorTypeMap;
   to: keyof ColorTypeMap;
@@ -19,16 +18,16 @@ export function ColorOutput({ value, from, to, className, ...rest }: ColorOutput
 
   return (
     <ul
-      className={classNames(
-        'flex flex-col border-2 p-2 rounded-sm justify-center min-w-[150px]',
+      className={cn(
+        'flex flex-col justify-center gap-0.5 rounded-lg border bg-background/60 p-2 tabular-nums',
         className
       )}
       {...rest}
     >
       {Object.entries(convertedValue).map(([key, value]) => (
-        <li key={key} className="p-1 pointer-events-none">
-          <span className="font-bold">{key.toUpperCase()}: </span>
-          {formatValue(value)}
+        <li key={key} className="pointer-events-none flex items-baseline justify-between gap-2">
+          <span className="text-muted-foreground">{key.toUpperCase()}:</span>
+          <span className="font-medium">{formatValue(value)}</span>
         </li>
       ))}
     </ul>

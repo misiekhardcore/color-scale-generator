@@ -2,6 +2,8 @@ import type { COLOR_SPACES } from './constants';
 
 export type ColorSpace = (typeof COLOR_SPACES)[number];
 
+export type ScaleMode = 'two-color' | 'step';
+
 export type RGB = { r: number; g: number; b: number };
 export type CMYK = { c: number; m: number; y: number; k: number };
 export type HSL = { h: number; s: number; l: number };

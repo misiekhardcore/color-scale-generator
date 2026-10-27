@@ -1,17 +1,26 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import { TooltipProvider } from '@/app/components/ui/tooltip';
 import { getMouseEvent } from '@/tests/services';
 
 import { ClickableColorOutput } from './ClickableColorOutput';
 
+function renderSwatch() {
+  return render(
+    <TooltipProvider>
+      <ClickableColorOutput value={{ r: 0, g: 0, b: 0 }} type="RGB" />
+    </TooltipProvider>
+  );
+}
+
 describe('ClickableColorOutput', () => {
   it('should render properly', () => {
-    render(<ClickableColorOutput value={{ r: 0, g: 0, b: 0 }} type="RGB" />);
+    renderSwatch();
     expect(screen.getByText('R:')).toBeInTheDocument();
   });
 
   it('should change color space', () => {
-    render(<ClickableColorOutput value={{ r: 0, g: 0, b: 0 }} type="RGB" />);
+    renderSwatch();
     expect(screen.getByText('R:')).toBeInTheDocument();
 
     fireEvent(screen.getByRole('list'), getMouseEvent('mousedown', { pageX: 0, pageY: 0 }));
@@ -31,8 +40,17 @@ describe('ClickableColorOutput', () => {
     expect(screen.getByText('HEX:')).toBeInTheDocument();
   });
 
+  it('should change color space when activated with the keyboard', () => {
+    renderSwatch();
+    expect(screen.getByText('R:')).toBeInTheDocument();
+
+    fireEvent.keyDown(screen.getByRole('list'), { key: 'Enter' });
+
+    expect(screen.getByText('C:')).toBeInTheDocument();
+  });
+
   it('should not change color if mouse was dragged', () => {
-    render(<ClickableColorOutput value={{ r: 0, g: 0, b: 0 }} type="RGB" />);
+    renderSwatch();
     expect(screen.getByText('R:')).toBeInTheDocument();
 
     fireEvent(screen.getByRole('list'), getMouseEvent('mousedown', { pageX: 0, pageY: 0 }));
@@ -46,7 +64,7 @@ describe('ClickableColorOutput', () => {
 
   it('should not change color if delay passed from mousedown to mouseup', () => {
     jest.useFakeTimers();
-    render(<ClickableColorOutput value={{ r: 0, g: 0, b: 0 }} type="RGB" />);
+    renderSwatch();
     expect(screen.getByText('R:')).toBeInTheDocument();
 
     fireEvent(screen.getByRole('list'), getMouseEvent('mousedown', { pageX: 0, pageY: 0 }));
