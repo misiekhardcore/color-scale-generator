@@ -119,14 +119,14 @@ describe('Scaler', () => {
     expect(scale).toMatchObject([{ ral: 9005 }, { ral: 7023 }, { ral: 9016 }]);
   });
 
-  it('should throw an error if scaler not found', () => {
+  it('should throw an error if scaler not found (wrong input scale)', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input
       Scaler.getScale('UNKNOWN', 'UNKNOWN', { r: 0, g: 0, b: 0 }, { r: 255, g: 255, b: 255 }, 3)
     ).toThrow('No scaler getScaleUnknown found');
   });
 
-  it('should throw an error if converter not found', () => {
+  it('should throw an error if converter not found (wrong output scale)', () => {
     expect(() =>
       // @ts-expect-error Testing invalid input
       Scaler.getScale('UNKNOWN', 'RGB', { r: 0, g: 0, b: 0 }, { r: 255, g: 255, b: 255 }, 3)

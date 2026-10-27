@@ -1,4 +1,4 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 
 export type StringifierKey<P extends string> = `${Lowercase<string & P>}ToString`;
 

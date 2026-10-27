@@ -1,6 +1,7 @@
 'use client';
 
-import { KeyboardEvent, useEffect, useState } from 'react';
+import type { KeyboardEvent } from 'react';
+import { useState } from 'react';
 
 import { ColorOutput } from '@/app/components/ColorOutput';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/app/components/ui/tooltip';
@@ -40,16 +41,12 @@ export function ClickableColorOutput({ value, type }: ClickableColorOutputProps)
   const textColor = getContrastColor(rgbColor);
   const nextColorSpace = getNextArrayElementInLoop(COLOR_SPACES, selectedColorSpace);
 
-  useEffect(() => {
-    setSelectedColorSpace(type);
-  }, [type]);
-
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         <ColorOutput
           aria-label={`Color values in ${selectedColorSpace}. Activate to show them in ${nextColorSpace}.`}
-          className="min-h-[124px] cursor-pointer focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="min-h-31 cursor-pointer focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           value={convertedColor}
           from={selectedColorSpace}
           to={selectedColorSpace}

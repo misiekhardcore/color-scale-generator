@@ -1,4 +1,4 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 
 export type ExporterKey<P extends string> = `export${Capitalize<string & P>}`;
 

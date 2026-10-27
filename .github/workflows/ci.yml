@@ -19,20 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
-      - name: Set up node
-        uses: actions/setup-node@main
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v2.0.0
         with:
-          node-version: 24
-          cache: yarn
-          cache-dependency-path: ${{ github.workspace}}/yarn.lock
+          runtime: node@24
+          cache: true
 
       - name: Install node dependencies
         working-directory: ${{ github.workspace}}
-        run: yarn install
+        run: pnpm install
 
       - name: Run linting
         working-directory: ${{ github.workspace}}
-        run: yarn lint
+        run: pnpm lint
 
   unit-tests:
     name: Unit tests
@@ -41,20 +40,19 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
-      - name: Set up node
-        uses: actions/setup-node@main
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v2.0.0
         with:
-          node-version: 24
-          cache: yarn
-          cache-dependency-path: ${{ github.workspace}}/yarn.lock
+          runtime: node@24
+          cache: true
 
       - name: Install node dependencies
         working-directory: ${{ github.workspace}}
-        run: yarn install
+        run: pnpm install
 
       - name: Run tests
         working-directory: ${{ github.workspace}}
-        run: yarn test
+        run: pnpm test
 
   build:
     name: Build
@@ -63,17 +61,16 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
-      - name: Set up node
-        uses: actions/setup-node@main
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v2.0.0
         with:
-          node-version: 24
-          cache: yarn
-          cache-dependency-path: ${{ github.workspace}}/yarn.lock
+          runtime: node@24
+          cache: true
 
       - name: Install node dependencies
         working-directory: ${{ github.workspace}}
-        run: yarn install
+        run: pnpm install
 
       - name: Build
         working-directory: ${{ github.workspace}}
-        run: yarn build
+        run: pnpm build

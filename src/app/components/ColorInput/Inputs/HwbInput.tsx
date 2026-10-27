@@ -1,8 +1,8 @@
 import { Input } from '@/app/components';
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 import { Validator } from '@/lib/services';
 
-import { InputComponentProps } from './types';
+import type { InputComponentProps } from './types';
 
 const HWB_KEY = 'HWB';
 type KEY = 'HWB';

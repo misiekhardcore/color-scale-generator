@@ -1,5 +1,5 @@
-import { ColorTypeMap } from '@/app/types';
-import { FilterPropertiesByKey, UnionToIntersection } from '@/lib/types';
+import type { ColorTypeMap } from '@/app/types';
+import type { FilterPropertiesByKey, UnionToIntersection } from '@/lib/types';
 
 export type ConverterKey<
   T extends string,

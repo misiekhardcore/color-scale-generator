@@ -28,13 +28,13 @@ Generate color scales based on two input colors (or a start color and a step val
 
 ## Getting started
 
-Requirements: [Node.js](https://nodejs.org) (see `.nvmrc` or `engines` in `package.json`) and [Yarn](https://yarnpkg.com) 4.
+Requirements: [Node.js](https://nodejs.org) (see `.nvmrc` or `engines` in `package.json`) and [PNPM](https://pnpm.io/) 12.
 
 ```bash
 git clone https://github.com/misiekhardcore/color-scale-generator.git
 cd color-scale-generator
-yarn install
-yarn dev
+pnpm install
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to use the app.
@@ -100,12 +100,12 @@ const scale = Scaler.getScale('RGB', 'HEX', { r: 0, g: 0, b: 0 }, { r: 255, g: 2
 ## Development
 
 ```bash
-yarn dev        # start the dev server
-yarn build      # lint + build for production
-yarn test       # run the unit tests once
-yarn test:watch # run tests in watch mode
-yarn lint       # run eslint + prettier
-yarn lint:fix   # auto-fix lint and format issues
+pnpm dev        # start the dev server
+pnpm build      # lint + build for production
+pnpm test       # run the unit tests once
+pnpm test:watch # run tests in watch mode
+pnpm lint       # run eslint + prettier
+pnpm lint:fix   # auto-fix lint and format issues
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.

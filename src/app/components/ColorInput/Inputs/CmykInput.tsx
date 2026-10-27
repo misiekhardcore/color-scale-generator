@@ -1,8 +1,8 @@
-import { ColorTypeMap } from '@/app/types';
-import { Validator } from '@/lib/services';
 import { Input } from '@/app/components';
+import type { ColorTypeMap } from '@/app/types';
+import { Validator } from '@/lib/services';
 
-import { InputComponentProps } from './types';
+import type { InputComponentProps } from './types';
 
 const CMYK_KEY = 'CMYK';
 type KEY = 'CMYK';

@@ -1,8 +1,7 @@
-import { RGB } from '@/app/types';
-
-import { Converters, ConvertersFromRGB, ConvertersToRGB } from './types';
+import type { RGB } from '@/app/types';
 
 import ralrgb from './RAL-RGB.json';
+import type { Converters, ConvertersFromRGB, ConvertersToRGB } from './types';
 
 function findClosestRal(color: RGB) {
   let closestRal = 0;

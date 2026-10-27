@@ -1,7 +1,7 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 
 import { exporters } from './exporters';
-import { Exporters } from './types';
+import type { Exporters } from './types';
 
 export class Exporter {
   static getExporter<T extends keyof Exporters, P extends keyof ColorTypeMap>(type: T) {

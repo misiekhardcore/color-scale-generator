@@ -1,4 +1,4 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 
 export interface InputComponentProps<T extends keyof ColorTypeMap> {
   value: ColorTypeMap[T];

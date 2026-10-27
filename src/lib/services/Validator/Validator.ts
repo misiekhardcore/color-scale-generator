@@ -1,7 +1,7 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 import { capitalize } from '@/lib/helpers';
 
-import { Validators } from './types';
+import type { Validators } from './types';
 import { validators } from './validators';
 
 export class Validator {

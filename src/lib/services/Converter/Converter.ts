@@ -1,8 +1,8 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 import { capitalize } from '@/lib/helpers';
 
 import { converters } from './converters';
-import { Converters } from './types';
+import type { Converters } from './types';
 
 export class Converter {
   static getConverter<T extends keyof ColorTypeMap, P extends keyof ColorTypeMap>(from: T, to: P) {

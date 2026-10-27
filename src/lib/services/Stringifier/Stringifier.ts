@@ -1,6 +1,7 @@
-import { ColorTypeMap } from '@/app/types';
-import { Stringifiers } from './types';
+import type { ColorTypeMap } from '@/app/types';
+
 import { stringifiers } from './stringifiers';
+import type { Stringifiers } from './types';
 
 export class Stringifier {
   static stringify<T extends keyof ColorTypeMap>(from: T, color: ColorTypeMap[T]): string {

@@ -6,13 +6,15 @@ The following is a set of guidelines for contributing. These are mostly guidelin
 
 ## Table of contents
 
-- [Code of conduct](#code-of-conduct)
-- [Getting started](#getting-started)
-- [Development workflow](#development-workflow)
-- [Coding standards](#coding-standards)
-- [Testing](#testing)
-- [Pull requests](#pull-requests)
-- [Reporting issues](#reporting-issues)
+- [Contributing to color-scale-generator](#contributing-to-color-scale-generator)
+  - [Table of contents](#table-of-contents)
+  - [Code of conduct](#code-of-conduct)
+  - [Getting started](#getting-started)
+  - [Development workflow](#development-workflow)
+  - [Coding standards](#coding-standards)
+  - [Testing](#testing)
+  - [Pull requests](#pull-requests)
+  - [Reporting issues](#reporting-issues)
 
 ## Code of conduct
 
@@ -20,12 +22,12 @@ Be respectful and constructive. Harassment or exclusionary behavior of any kind 
 
 ## Getting started
 
-Requirements: Node.js and Yarn 4.
+Requirements: Node.js and pnpm 4.
 
 ```bash
 git clone https://github.com/misiekhardcore/color-scale-generator.git
 cd color-scale-generator
-yarn install
+pnpm install
 ```
 
 ## Development workflow
@@ -43,15 +45,15 @@ yarn install
 ## Coding standards
 
 - **TypeScript** - no `any`/`unknown` types. Strict mode is on; fix type errors rather than suppress them.
-- **ESLint + Prettier** - run `yarn lint` and `yarn lint:fix` before committing.
+- **ESLint + Prettier** - run `pnpm lint` and `pnpm lint:fix` before committing.
 - **Imports** - use the `@/` alias for `src/` paths.
 - **Components** - prefer small, typed, single-purpose components.
 
 ## Testing
 
 - Unit tests live next to the code they cover (`*.test.ts` / `*.test.tsx`).
-- Run all tests once: `yarn test`
-- Run in watch mode: `yarn test:watch`
+- Run all tests once: `pnpm test`
+- Run in watch mode: `pnpm test:watch`
 - Add tests for any new behavior.
 
 ## Pull requests

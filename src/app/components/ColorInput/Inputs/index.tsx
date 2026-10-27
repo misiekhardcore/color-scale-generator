@@ -1,16 +1,15 @@
-import { ColorTypeMap } from '@/app/types';
+import type { JSX } from 'react';
 
-import type { InputComponentProps } from './types';
+import type { ColorTypeMap } from '@/app/types';
 
-import { RgbInput } from './RgbInput';
-import { HexInput } from './HexInput';
 import { CmykInput } from './CmykInput';
+import { HexInput } from './HexInput';
 import { HslInput } from './HslInput';
 import { HsvInput } from './HsvInput';
 import { HwbInput } from './HwbInput';
 import { RalInput } from './RalInput';
-
-import type { JSX } from 'react';
+import { RgbInput } from './RgbInput';
+import type { InputComponentProps } from './types';
 
 export type { InputComponentProps };
 

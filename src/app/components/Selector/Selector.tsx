@@ -2,6 +2,7 @@
 
 import { useId } from 'react';
 
+import { Label } from '@/app/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -9,7 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
-import { Label } from '@/app/components/ui/label';
 import { isNumber } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 

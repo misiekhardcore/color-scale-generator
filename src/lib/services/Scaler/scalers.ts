@@ -1,6 +1,8 @@
-import { ColorTypeMap } from '@/app/types';
-import { Scalers, StepScalers } from './types';
+import type { ColorTypeMap } from '@/app/types';
+
 import { Converter } from '../Converter';
+
+import type { Scalers, StepScalers } from './types';
 
 // Helper function to generate scale from start color and step for RGB
 function generateScaleFromStepRgb(

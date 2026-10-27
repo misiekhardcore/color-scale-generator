@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Converter } from '@/lib/services';
+
 import type { ColorSpace, ColorTypeMap } from '@/app/types';
+import { Converter } from '@/lib/services';
 
 const INITIAL_INPUT_COLOR_SPACE: keyof ColorTypeMap = 'RGB';
 

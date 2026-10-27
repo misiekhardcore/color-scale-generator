@@ -1,9 +1,9 @@
 'use client';
 
-import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from 'cn';
 import { Toggle as TogglePrimitive } from 'radix-ui';
+import * as React from 'react';
 
 const toggleVariants = cva(
   // `aria-checked` mirrors `data-[state=on]` inside a toggle group because any

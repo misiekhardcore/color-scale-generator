@@ -2,7 +2,6 @@
 
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 
 import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/app/components/ui/tooltip';
@@ -15,15 +14,6 @@ const THEME_OPTIONS = [
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // The active theme is only known in the browser, so render a stable
-  // placeholder on the server to avoid a hydration mismatch.
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return <div aria-hidden className="h-7 w-[102px] rounded-lg border bg-muted/40" />;
-  }
 
   return (
     <ToggleGroup
@@ -38,7 +28,7 @@ export function ThemeToggle() {
       {THEME_OPTIONS.map(({ value, label, Icon }) => (
         <Tooltip key={value}>
           <TooltipTrigger asChild>
-            <ToggleGroupItem value={value} aria-label={label}>
+            <ToggleGroupItem value={value} aria-label={label} suppressHydrationWarning>
               <Icon />
             </ToggleGroupItem>
           </TooltipTrigger>

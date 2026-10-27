@@ -26,6 +26,7 @@ describe('CopyButton', () => {
     fireEvent.click(button);
     expect(button).toHaveTextContent('Copied!');
     expect(button).toBeDisabled();
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('text');
     act(() => {
       jest.advanceTimersByTime(2000);

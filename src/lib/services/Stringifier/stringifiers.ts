@@ -1,4 +1,4 @@
-import { Stringifiers } from './types';
+import type { Stringifiers } from './types';
 
 export const stringifiers: Stringifiers = {
   cmykToString: ({ c, m, y, k }) => {

@@ -1,4 +1,4 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 
 export type ValidatorKey<P extends string> = `validate${Capitalize<Lowercase<string & P>>}`;
 

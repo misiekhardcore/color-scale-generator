@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 import { isNumber } from '@/lib/helpers';
 import { Converter } from '@/lib/services';
 import { cn } from '@/lib/utils';
@@ -33,7 +33,7 @@ export function ColorOutput({ value, from, to, mutedLabel, className, ...rest }:
       {Object.entries(convertedValue).map(([key, value]) => (
         <li key={key} className="pointer-events-none flex items-baseline justify-between gap-2">
           <span className={cn(mutedLabel && 'text-muted-foreground')}>{key.toUpperCase()}:</span>
-          <span className="font-medium">{formatValue(value)}</span>
+          <span className="font-medium">{formatValue(value as string | number)}</span>
         </li>
       ))}
     </ul>

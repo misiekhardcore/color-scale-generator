@@ -22,8 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
-import { ColorTypeMap } from '@/app/types';
-import { Exporter, Exporters } from '@/lib/services';
+import type { ColorTypeMap } from '@/app/types';
+import type { Exporters } from '@/lib/services';
+import { Exporter } from '@/lib/services';
 
 import { CopyButton } from './CopyButton';
 

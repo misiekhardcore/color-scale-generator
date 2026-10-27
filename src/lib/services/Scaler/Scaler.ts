@@ -1,10 +1,10 @@
-import { ColorTypeMap } from '@/app/types';
+import type { ColorTypeMap } from '@/app/types';
 import { capitalize } from '@/lib/helpers';
 
 import { Converter } from '../Converter';
 
-import { Scalers, StepScalers } from './types';
 import { scalers, stepScalers } from './scalers';
+import type { Scalers, StepScalers } from './types';
 
 export class Scaler {
   static getScaler<T extends keyof ColorTypeMap>(type: T) {
@@ -65,6 +65,6 @@ export class Scaler {
     // Step is expected in the target color space format
     // For HEX and RAL, step should be in RGB format
     // For other color spaces, step should match the target color space
-    return s(convertedColor, step as Partial<Record<keyof ColorTypeMap[T], number>>, colorsNumber);
+    return s(convertedColor, step, colorsNumber);
   }
 }

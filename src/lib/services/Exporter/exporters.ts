@@ -1,6 +1,7 @@
-import { Exporters } from './types';
 import { Converter } from '../Converter';
 import { Stringifier } from '../Stringifier';
+
+import type { Exporters } from './types';
 
 const CSS_VARIABLE_PREFIX = 'color';
 

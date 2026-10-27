@@ -1,7 +1,7 @@
 import { Input } from '@/app/components';
 import { Validator } from '@/lib/services';
 
-import { InputComponentProps } from './types';
+import type { InputComponentProps } from './types';
 
 const RAL_KEY = 'RAL';
 type KEY = 'RAL';

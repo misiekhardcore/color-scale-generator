@@ -1,4 +1,4 @@
-import { Validators } from './types';
+import type { Validators } from './types';
 
 export const validators: Validators = {
   validateCmyk: ({ c, m, y, k }) => {

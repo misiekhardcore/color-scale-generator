@@ -1,6 +1,7 @@
 'use client';
 
-import { ChangeEvent, ComponentProps, useId } from 'react';
+import type { ChangeEvent, ComponentProps } from 'react';
+import { useId } from 'react';
 
 import { Input as InputPrimitive } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';

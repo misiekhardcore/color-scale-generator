@@ -4,17 +4,16 @@ import '@testing-library/jest-dom';
 // so the components under test would otherwise throw on render.
 if (typeof window !== 'undefined') {
   if (!window.matchMedia) {
-    window.matchMedia = (query: string) =>
-      ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: () => {},
-        removeListener: () => {},
-        addEventListener: () => {},
-        removeEventListener: () => {},
-        dispatchEvent: () => false,
-      }) as unknown as MediaQueryList;
+    window.matchMedia = (query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    });
   }
 
   if (!globalThis.ResizeObserver) {
