@@ -1,6 +1,6 @@
+import { TooltipProvider } from '@konopskidev/ui';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { TooltipProvider } from '@/app/components/ui/tooltip';
 import { getMouseEvent } from '@/tests/services';
 
 import { ClickableColorOutput } from './ClickableColorOutput';

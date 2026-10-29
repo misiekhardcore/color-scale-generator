@@ -1,10 +1,9 @@
 'use client';
 
+import { Input as InputPrimitive, Label } from '@konopskidev/ui';
 import type { ChangeEvent, ComponentProps } from 'react';
 import { useId } from 'react';
 
-import { Input as InputPrimitive } from '@/app/components/ui/input';
-import { Label } from '@/app/components/ui/label';
 import { cn } from '@/lib/utils';
 
 type Value = string | number | undefined;

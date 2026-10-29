@@ -1,10 +1,9 @@
 'use client';
 
-import { DownloadIcon } from 'lucide-react';
-import { useId, useState } from 'react';
-
-import { Button } from '@/app/components/ui/button';
 import {
+  Button,
+  CodeBlock,
+  CodeBlockContent,
   Dialog,
   DialogClose,
   DialogContent,
@@ -13,15 +12,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/app/components/ui/dialog';
-import { Label } from '@/app/components/ui/label';
-import {
+  Label,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/app/components/ui/select';
+} from '@konopskidev/ui';
+import { DownloadIcon } from 'lucide-react';
+import { useId, useState } from 'react';
+
 import type { ColorTypeMap } from '@/app/types';
 import type { Exporters } from '@/lib/services';
 import { Exporter } from '@/lib/services';
@@ -84,7 +84,7 @@ export function ExportModal<T extends keyof ColorTypeMap>({ from, scale }: Expor
           Export
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent aria-modal="true">
         <DialogHeader>
           <DialogTitle>Export</DialogTitle>
           <DialogDescription>
@@ -112,9 +112,9 @@ export function ExportModal<T extends keyof ColorTypeMap>({ from, scale }: Expor
             </Select>
           </div>
 
-          <pre className="max-h-64 overflow-auto rounded-lg border bg-muted/40 p-3 text-xs leading-relaxed">
-            {exportScale}
-          </pre>
+          <CodeBlock>
+            <CodeBlockContent className="max-h-64 overflow-auto">{exportScale}</CodeBlockContent>
+          </CodeBlock>
         </div>
 
         <DialogFooter>

@@ -1,10 +1,9 @@
 'use client';
 
+import { Button } from '@konopskidev/ui';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-
-import { Button } from '@/app/components/ui/button';
 
 export function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);

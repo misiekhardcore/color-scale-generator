@@ -1,15 +1,15 @@
 'use client';
 
-import { useId } from 'react';
-
-import { Label } from '@/app/components/ui/label';
 import {
+  Label,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/app/components/ui/select';
+} from '@konopskidev/ui';
+import { useId } from 'react';
+
 import { isNumber } from '@/lib/helpers';
 import { cn } from '@/lib/utils';
 

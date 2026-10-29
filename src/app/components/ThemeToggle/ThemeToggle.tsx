@@ -1,10 +1,14 @@
 'use client';
 
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@konopskidev/ui';
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
-import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/app/components/ui/tooltip';
 
 const THEME_OPTIONS = [
   { value: 'light', label: 'Light', Icon: SunIcon },
