@@ -1,5 +1,7 @@
 'use client';
 
+import { Input } from '@konopskidev/ui';
+
 import { ColorInput } from '@/app/components/ColorInput';
 import { ColorOutput } from '@/app/components/ColorOutput';
 import type { ColorSpace, ColorTypeMap } from '@/app/types';
@@ -33,13 +35,16 @@ export function ColorField({
     <div className={cn('flex min-w-0 flex-col gap-3 rounded-lg border bg-muted/30 p-3', className)}>
       <div className="flex items-center justify-between gap-3">
         <span className="text-sm font-medium">{label}</span>
-        <input
-          type="color"
-          aria-label={`${label} picker`}
-          className="h-8 w-12 shrink-0 cursor-pointer rounded-md border border-input bg-transparent p-0.5"
-          value={hexValue}
-          onChange={(event) => onHexChange(event.target.value)}
-        />
+        {/* The field renders its input inside a full-width wrapper, so the swatch is sized there. */}
+        <div className="w-12 shrink-0">
+          <Input
+            type="color"
+            aria-label={`${label} picker`}
+            className="h-8 w-full cursor-pointer p-0.5"
+            value={hexValue}
+            onChange={(event) => onHexChange(event.target.value)}
+          />
+        </div>
       </div>
       <ColorInput type={colorSpace} value={value} onChange={onChange} />
       <ColorOutput

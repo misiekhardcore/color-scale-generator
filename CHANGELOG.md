@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Light, dark, and system themes that follow the OS by default, with a toggle in the page header.
 - A gradient preview of the whole scale above the result swatches.
 - Keyboard activation for result swatches, alongside the existing click-to-cycle behavior.
+- Adopted [`@konopskidev/ui`](https://github.com/misiekhardcore/konopskidevui), the konopskidev design system, as the component library.
 
 ### Changed
 
@@ -27,10 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rebuilt the export dialog on the shadcn dialog, adding Escape-to-close, focus trapping, and body scroll locking.
 - Clamped the number of colors to 1-100 so an empty or out-of-range input can no longer produce invalid scales.
 - Copying a scale now confirms with a toast instead of only swapping the button label.
+- The palette, typography (Lato, Playfair Display, Lora, and JetBrains Mono), control sizing, and card surfaces now come from the design system tokens instead of the local shadcn/ui copy.
 
 ### Removed
 
 - Hand-rolled `Button`, `Modal`, and `ColorControlRow` components, replaced by shadcn primitives.
+- The vendored `src/app/components/ui` primitives, `components.json`, and the `shadcn`, `radix-ui`, `class-variance-authority`, and `tw-animate-css` dependencies, now provided by `@konopskidev/ui`.
 
 ### Fixed
 

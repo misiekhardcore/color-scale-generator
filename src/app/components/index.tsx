@@ -14,4 +14,5 @@ export { ScaleModeSection } from './ScaleModeSection';
 export { InputColorsSection } from './InputColorsSection';
 export { ScaleSettingsSection } from './ScaleSettingsSection';
 export { ThemeProvider } from './ThemeProvider';
+export { Toaster } from './Toaster';
 export { ThemeToggle } from './ThemeToggle';

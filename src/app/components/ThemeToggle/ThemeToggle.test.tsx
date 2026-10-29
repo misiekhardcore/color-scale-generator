@@ -1,7 +1,7 @@
+import { TooltipProvider } from '@konopskidev/ui';
 import { render, screen } from '@testing-library/react';
 
 import { ThemeProvider } from '@/app/components/ThemeProvider';
-import { TooltipProvider } from '@/app/components/ui/tooltip';
 
 import { ThemeToggle } from './ThemeToggle';
 

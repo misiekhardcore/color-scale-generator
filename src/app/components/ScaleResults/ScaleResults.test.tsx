@@ -1,7 +1,6 @@
+import { TooltipProvider } from '@konopskidev/ui';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { ReactElement } from 'react';
-
-import { TooltipProvider } from '@/app/components/ui/tooltip';
 
 import { ScaleResults } from './ScaleResults';
 

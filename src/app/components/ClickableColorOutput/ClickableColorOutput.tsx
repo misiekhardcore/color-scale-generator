@@ -1,10 +1,10 @@
 'use client';
 
+import { Tooltip, TooltipContent, TooltipTrigger } from '@konopskidev/ui';
 import type { KeyboardEvent } from 'react';
 import { useState } from 'react';
 
 import { ColorOutput } from '@/app/components/ColorOutput';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/app/components/ui/tooltip';
 import { COLOR_SPACES } from '@/app/constants';
 import type { ColorTypeMap } from '@/app/types';
 import { Converter } from '@/lib/services';

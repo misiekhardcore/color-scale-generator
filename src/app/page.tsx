@@ -56,7 +56,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:py-8">
+    <main className="container-page flex-1 py-6 lg:py-8">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:items-start">
         <ColorScaleForm
           scaleMode={scaleMode}

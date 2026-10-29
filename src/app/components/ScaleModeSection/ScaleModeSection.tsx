@@ -1,7 +1,8 @@
 'use client';
 
+import { ToggleGroup, ToggleGroupItem } from '@konopskidev/ui';
+
 import { Section } from '@/app/components/Section';
-import { ToggleGroup, ToggleGroupItem } from '@/app/components/ui/toggle-group';
 import type { ScaleMode } from '@/app/types';
 
 interface ScaleModeSectionProps {

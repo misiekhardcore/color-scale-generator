@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 import {
   Card,
   CardAction,
@@ -7,7 +5,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/app/components/ui/card';
+} from '@konopskidev/ui';
+import type { ReactNode } from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface SectionProps {
@@ -35,13 +35,13 @@ export function Section({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle role="heading" aria-level={2}>
-          {title}
+        <CardTitle asChild>
+          <h2>{title}</h2>
         </CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
         {action ? <CardAction>{action}</CardAction> : null}
       </CardHeader>
-      <CardContent className={cn('flex flex-col gap-4', contentClassName)}>{children}</CardContent>
+      <CardContent className={cn('stack', contentClassName)}>{children}</CardContent>
     </Card>
   );
 }

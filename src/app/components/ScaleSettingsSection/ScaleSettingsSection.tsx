@@ -1,13 +1,11 @@
 'use client';
 
+import { Input, Label, Slider } from '@konopskidev/ui';
 import { useId } from 'react';
 
 import { Section } from '@/app/components/Section';
 import { Selector } from '@/app/components/Selector';
 import { StepInputs } from '@/app/components/StepInputs';
-import { Input } from '@/app/components/ui/input';
-import { Label } from '@/app/components/ui/label';
-import { Slider } from '@/app/components/ui/slider';
 import { COLOR_SPACES, MAX_RESULTS_COUNT, MIN_RESULTS_COUNT } from '@/app/constants';
 import type { ColorSpace, ScaleMode } from '@/app/types';
 
@@ -61,7 +59,7 @@ export function ScaleSettingsSection({
           />
         </div>
         <Slider
-          aria-label="Number of colors"
+          thumbLabels={['Number of colors']}
           min={MIN_RESULTS_COUNT}
           max={MAX_RESULTS_COUNT}
           step={1}

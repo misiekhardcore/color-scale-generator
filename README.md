@@ -21,7 +21,7 @@ Generate color scales based on two input colors (or a start color and a step val
 - [React 19](https://react.dev)
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS 4](https://tailwindcss.com)
-- [shadcn/ui](https://ui.shadcn.com) components (Radix UI primitives, `cn`, `class-variance-authority`)
+- [@konopskidev/ui](https://github.com/misiekhardcore/konopskidevui) — the konopskidev design system: shadcn/ui components and theme tokens on Tailwind CSS v4
 - [next-themes](https://github.com/pacocoursey/next-themes) for light/dark/system theming
 - [Jest](https://jestjs.io) for unit testing
 - [ESLint](https://eslint.org) + [Prettier](https://prettier.io) for linting
@@ -78,15 +78,15 @@ Open [http://localhost:3000](http://localhost:3000) to use the app.
 ```
 src/
   app/        # Next.js App Router: page, layout, hooks, components
-    components/
-      ui/     # shadcn/ui primitives (generated, restyled to repo conventions)
+    components/ # app components, composed from @konopskidev/ui
   lib/
     services/ # Scaler, Converter, Validator, Stringifier, Exporter
     helpers/  # small utilities
     utils.ts  # `cn` class name helper
   tests/      # shared test helpers
-components.json # shadcn/ui CLI configuration
 ```
+
+UI primitives are not vendored: `@konopskidev/ui` supplies the components, the palette in `src/app/index.css`, and the `--font-*` variables that `src/app/layout.tsx` sets with `next/font`.
 
 The public services are re-exported from `lib/services` and can be used standalone:
 
