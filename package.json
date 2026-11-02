@@ -63,7 +63,7 @@
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "jiti": "2.6.1",
-    "lint-staged": "16.4.0",
+    "lint-staged": "17.6.0",
     "pinst": "3.0.0",
     "postcss": "8.5.8",
     "prettier": "3.6.2",
