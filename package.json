@@ -27,7 +27,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@konopskidev/ui": "^0.2.0",
+    "@konopskidev/ui": "^0.5.0",
     "cn": "^0.5.0",
     "eslint-plugin-jest": "^29.17.0",
     "lucide-react": "^1.62.0",
