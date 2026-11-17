@@ -5,8 +5,9 @@ import type { ColorTypeMap } from '@/app/types';
 import type { InputComponentProps } from './Inputs';
 import { inputComponents } from './Inputs';
 
-interface ColorInputProps<T extends keyof ColorTypeMap = keyof ColorTypeMap>
-  extends InputComponentProps<T> {
+interface ColorInputProps<
+  T extends keyof ColorTypeMap = keyof ColorTypeMap,
+> extends InputComponentProps<T> {
   type: T;
 }
 
