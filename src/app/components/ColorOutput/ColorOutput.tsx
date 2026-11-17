@@ -41,13 +41,7 @@ export function ColorOutput({ value, from, to, mutedLabel, className, ...rest }:
 }
 
 function formatValue(value: string | number) {
-  let formattedValue = '';
-  if (isNumber(value)) {
-    formattedValue = formatNumber(value);
-  } else {
-    formattedValue = value.toString().toUpperCase();
-  }
-  return formattedValue;
+  return isNumber(value) ? formatNumber(value) : value.toString().toUpperCase();
 }
 
 function formatNumber(num: string | number): string {

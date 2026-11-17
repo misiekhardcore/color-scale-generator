@@ -237,11 +237,9 @@ const convertersFromRgb: ConvertersFromRGB = {
     const max = Math.max(r1, g1, b1);
     const min = Math.min(r1, g1, b1);
     let h = 0;
-    let s = 0;
-    const v = max;
-
     const d = max - min;
-    s = max === 0 ? 0 : d / max;
+    const s = max === 0 ? 0 : d / max;
+    const v = max;
 
     if (max !== min) {
       switch (max) {
