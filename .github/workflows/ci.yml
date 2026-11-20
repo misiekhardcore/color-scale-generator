@@ -20,9 +20,9 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Install pnpm and Node.js
-        uses: pnpm/setup@v2.1.0
+        uses: pnpm/setup@v3.2.0
         with:
-          runtime: node@24
+          runtime: node@26
           cache: true
 
       - name: Install node dependencies
@@ -41,9 +41,9 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Install pnpm and Node.js
-        uses: pnpm/setup@v2.1.0
+        uses: pnpm/setup@v3.2.0
         with:
-          runtime: node@24
+          runtime: node@26
           cache: true
 
       - name: Install node dependencies
@@ -62,9 +62,9 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Install pnpm and Node.js
-        uses: pnpm/setup@v2.1.0
+        uses: pnpm/setup@v3.2.0
         with:
-          runtime: node@24
+          runtime: node@26
           cache: true
 
       - name: Install node dependencies
